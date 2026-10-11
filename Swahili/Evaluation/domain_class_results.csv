@@ -1,0 +1,7 @@
+language,domain,precision,recall,f1,support
+swa,agriculture,1.0,0.944,0.971,18
+swa,finance,0.9,1.0,0.947,18
+swa,health,1.0,1.0,1.0,18
+swa,law,1.0,1.0,1.0,16
+swa,telecoms,1.0,0.958,0.979,24
+swa,ALL (accuracy / macro F1),0.979,,0.98,94

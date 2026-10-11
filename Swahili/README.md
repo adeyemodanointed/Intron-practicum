@@ -29,6 +29,16 @@ Separate tier, not counted above: **381,292 words** of Swahili news (finance 196
 
 Inside the zip, scripts run in this order: `build_deliverables.py` (shared JSONL, statistics, licence tiers), `fetch_wikipedia.py` and `process_wikipedia.py`, `extract_tari.py`, `extract_tanzlii_pdfs.py`, `fetch_voa_agri.py`, `process_fineweb_domains.py` and `process_fineweb_train.py`, `process_swahili_news.py` and `process_finance_news.py`, `annotate_pnc.py`, `build_seed.py`, `train_eval_seed.py`, `build_notebook.py`. Shared filters: `caption_filter.py`, `quality_rules.py`.
 
+## Shared repository layout (added 7 October 2026)
+
+| Folder | Contents |
+|---|---|
+| `Data/` | Statistics per domain and split (`README.md`) and `build_shared_format.py`, which writes `Data.csv` (`Language, Domain, Source, Text, Split, License`), `Evaluation.csv` and the news-tier file. The CSVs themselves are not published (see "Not in this repository"). |
+| `Evaluation/` | `evaluate_pnc.py` and `evaluate_domain_class.py` (per language per domain), and `domain_class_results.csv`. |
+| `Modeling/PnC/` | `train_pnc_afroxlmr.py`: AfroXLMR token classifier with a punctuation head and a capitalisation head (written and checked offline; not yet trained). |
+| `Modeling/DomainClassification/` | `train_domain_classifier.py` (TF-IDF and logistic regression). On the 94 human-kept dev passages it scores 97.9% (agriculture 18, finance 18, health 18, law 16, telecoms 24), which is optimistic: dev passages are the clean ones and the train data shares sources with them. The 66% on all 97 reviewed passages below is the fairer figure. |
+| `DataGeneration/` | `generate_qa_swahili.py`: question-answer generation with Gemma (or another chat model) with automatic filters; pairs stay `auto_generated_unreviewed` until a native speaker reviews a sample. Not run yet. |
+
 ## Pipeline
 
 1. **Sources** with a record of licence and evidence URL (`results/source_register.csv`).
@@ -49,8 +59,9 @@ Shared record format: `id, language, domain, raw_text, source_dataset, source_sp
 | AfriVoice only, unfiltered | 100 | 2 kept; 74 domain right, 66 punctuation usable. Of these 100, 70 are not independently confirmed; see `results/afrivoice_review_scored.json`. |
 | AfriVoice blind re-review | 30 | 0 kept; agrees with the earlier answers on 22 of 30 rows. |
 | FineWeb-2 (agriculture, finance, telecoms) | 90 | **50 kept (55%)**; 64% domain right, 86% punctuation usable. Agriculture 17 of 30, finance 18 of 30, telecoms 15 of 30. |
+| Health and law (Wikipedia, TanzLII, others) | 60 | **31 kept (52%)**; 90% domain right, 78% punctuation usable. Health 18 of 30, law 13 of 30 (TanzLII statute fragments 4 of 13). |
 
-About 9,000 human-verified words in total. This is below the 10,000 verified words per domain milestone, so none of the five domains meets it yet. AfriVoice is excluded for Swahili.
+About 11,600 human-verified words in total (agriculture 1,276, finance 1,188, health 1,773, law 2,634, telecoms 4,758). This is below the 10,000 verified words per domain milestone, so none of the five domains meets it yet. AfriVoice is excluded for Swahili.
 
 ## Domain classifier
 
