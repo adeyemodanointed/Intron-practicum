@@ -1,0 +1,27 @@
+{
+ "all": {
+  "agriculture": 0.7,
+  "finance": 0.825,
+  "health": 0.6,
+  "law": 0.825,
+  "telecoms": 0.125
+ },
+ "kin": {
+  "agriculture": 0.75,
+  "finance": 0.925,
+  "health": 0.7,
+  "law": 0.725,
+  "telecoms": 0.05
+ },
+ "pcm": {
+  "finance": 0.4,
+  "health": 0.275
+ },
+ "swa": {
+  "agriculture": 0.7,
+  "finance": 0.825,
+  "health": 0.375,
+  "law": 0.225,
+  "telecoms": 0.125
+ }
+}

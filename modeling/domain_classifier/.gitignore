@@ -1,0 +1,7 @@
+data/
+inputs/
+kaggle_upload/
+*.zip
+*.joblib
+results/test_predictions.csv
+__pycache__/
