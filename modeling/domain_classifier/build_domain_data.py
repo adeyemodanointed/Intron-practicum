@@ -3,7 +3,7 @@
 Record (JSONL): id, language, text, labels (list: one or two domains, or ["other"]), split, source, label_source.
 label_source: gold:* = a person or a human dataset label assigned it; weak:* = rule, keyword or source default.
 
-Languages available now: swa, kin, pcm. ibo and yor can be added with --extra (CSV or JSONL with
+Languages: swa, kin, pcm, yor (Yoruba: synthetic, see yoruba()). More can be added with --extra (CSV or JSONL with
 columns language, text, labels, split; labels like "finance" / "finance|law" / "other").
 
 Splits
@@ -34,6 +34,7 @@ IN = {
     "swa_gold_labels": os.path.join(ROOT, "swahili_domain_column_B362.txt"),
     "kin_zip": os.path.join(HERE, "inputs", "kinyarwanda_classifier_final.zip"),
     "pcm_zip": os.path.join(HERE, "inputs", "pcm_results.zip"),
+    "yor_synthetic": os.path.join(HERE, "inputs", "yoruba_synthetic_clean.csv.gz"),
 }
 OUT = os.path.join(HERE, "data")
 SEED = 13
@@ -157,6 +158,17 @@ def pidgin():
     return out
 
 
+# ---------------------------------------------------------------- Yoruba
+def yoruba():
+    """Gemini-generated Yoruba sentences, 2,000 per domain, labels unreviewed; no `other` class.
+    Its own split is kept (train / validation -> dev / test), but every row is weak:synthetic, so the Yoruba
+    test score is reported separately and left out of the human-labelled ALL score."""
+    d = pd.read_csv(IN["yor_synthetic"])
+    sp = {"train": "train", "validation": "dev", "test": "test"}
+    return [rec("yor", r.Text, r.Domain, sp[r.Split], f"synthetic:{r.Generator_Model}", "weak:synthetic_unreviewed", r.ID)
+            for r in d.itertuples() if isinstance(r.Text, str)]
+
+
 def extra(paths):
     out = []
     for p in paths:
@@ -192,7 +204,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--extra", nargs="*", default=[], help="more languages in the shared format (CSV/JSONL)")
     a = ap.parse_args()
-    rows = swahili() + kinyarwanda() + pidgin() + extra(a.extra)
+    rows = swahili() + kinyarwanda() + pidgin() + yoruba() + extra(a.extra)
     rows = [r for r in rows if len(r["text"].split()) >= 3]
     # exact duplicates inside train (same language + text): keep the first
     seen, dedup = set(), []

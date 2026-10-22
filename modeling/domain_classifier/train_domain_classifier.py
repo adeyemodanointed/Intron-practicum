@@ -12,7 +12,7 @@ Sample weights: gold 1.0, teacher 0.8, weak 0.5; then rescaled so every language
 (Kinyarwanda has 2-5x more training rows than the others).
 Thresholds: one per domain, tuned on dev for that domain's F1: a shared set (each language counts equally),
 then a per-language override wherever that language's dev set has at least MIN_DEV_POS examples of the domain.
-Scores are on the human test sets only. A text counts as correct for "primary" if the top prediction is one of
+Scores are on the human test sets; ALL pools human-labelled rows only (the Yoruba test is synthetic and reported on its own). A text counts as correct for "primary" if the top prediction is one of
 its human labels, and for "exact" if the predicted set equals the human set.
 """
 import argparse, collections, csv, json, os, time
@@ -124,7 +124,7 @@ def main():
 
     results = {}   # (setup, language) -> (per-label, summary, confusion)
     for l in langs + ["ALL"]:
-        idx = [i for i, r in enumerate(test) if l == "ALL" or r["language"] == l]
+        idx = [i for i, r in enumerate(test) if (l == "ALL" and r["label_source"].startswith("gold")) or r["language"] == l]
         rs, ps = [test[i] for i in idx], [preds[i] for i in idx]
         results[("one model", l)] = (*score(rs, ps), confusion(rs, ps))
 
@@ -157,8 +157,8 @@ def report(results, langs, th, train, dev, test):
          "One model for every language. Labels: agriculture, finance, health, law, telecoms; a text gets one or two domains, "
          "or `other` when no domain reaches its threshold.", "",
          "Model: word 1-2 gram + character 3-5 gram TF-IDF (lower-cased, diacritics removed, language tag token) and one "
-         "class-balanced logistic regression per domain. Scores below are on human-labelled test sets only.", "",
-         "## Data", "", "| Language | Train rows | Dev rows (threshold tuning) | Test rows (human labels) |", "|---|---:|---:|---:|"]
+         "class-balanced logistic regression per domain. Test sets are human-labelled except Yoruba (synthetic, unreviewed); `ALL` pools the human-labelled rows only.", "",
+         "## Data", "", "| Language | Train rows | Dev rows (threshold tuning) | Test rows |", "|---|---:|---:|---:|"]
     for l in langs:
         L.append(f"| {l} | {sum(r['language'] == l for r in train):,} | {sum(r['language'] == l for r in dev):,} | {sum(r['language'] == l for r in test):,} |")
     L += ["", "Thresholds (shared, then per-language overrides tuned on that language's dev set):", ""]

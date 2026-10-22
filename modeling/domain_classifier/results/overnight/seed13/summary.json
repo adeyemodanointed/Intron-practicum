@@ -1,0 +1,20 @@
+{
+ "best_dev_mean_macro_f1": 0.8077,
+ "best_at": "epoch 0.50",
+ "args": {
+  "data_dir": "/kaggle/input/datasets/bmsofficial/domain-classifier-data-v2",
+  "out_dir": "/kaggle/working/runs/seed13",
+  "model": "Davlan/afro-xlmr-base",
+  "max_len": 256,
+  "epochs": 4,
+  "batch": 16,
+  "lr": 2e-05,
+  "warmup": 0.1,
+  "cap_per_cell": 15000,
+  "seed": 13,
+  "max_train": 0,
+  "max_eval": 0,
+  "eval_every": 0.5,
+  "no_test": false
+ }
+}

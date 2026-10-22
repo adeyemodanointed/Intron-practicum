@@ -1,7 +1,10 @@
 data/
 inputs/
 kaggle_upload/
+kaggle_v2/
+client_notebook/
 *.zip
 *.joblib
-results/test_predictions.csv
+*.npy
+*test_predictions.csv
 __pycache__/

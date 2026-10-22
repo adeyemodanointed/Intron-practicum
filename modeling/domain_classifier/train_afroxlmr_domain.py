@@ -103,7 +103,7 @@ def eval_split(P, rows, thresholds):
     preds = decide(P, [r["language"] for r in rows], thresholds)
     res = {}
     for l in sorted({r["language"] for r in rows}) + ["ALL"]:
-        idx = [i for i, r in enumerate(rows) if l == "ALL" or r["language"] == l]
+        idx = [i for i, r in enumerate(rows) if (l == "ALL" and r["label_source"].startswith("gold")) or r["language"] == l]
         rs, ps = [rows[i] for i in idx], [preds[i] for i in idx]
         res[l] = (*score(rs, ps), confusion(rs, ps))
     return preds, res
@@ -118,6 +118,8 @@ def main():
     ap.add_argument("--cap-per-cell", type=int, default=4000); ap.add_argument("--seed", type=int, default=13)
     ap.add_argument("--max-train", type=int, default=0, help="quick check: use only this many training rows")
     ap.add_argument("--max-eval", type=int, default=0, help="quick check: use only this many dev and test rows")
+    ap.add_argument("--eval-every", type=float, default=1.0, help="check dev every this fraction of an epoch (0.5 = twice per epoch)")
+    ap.add_argument("--no-test", action="store_true", help="tuning sweep: score dev only, do not save the model or touch the test set")
     a = ap.parse_args()
     random.seed(a.seed); np.random.seed(a.seed); torch.manual_seed(a.seed)
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
@@ -151,9 +153,29 @@ def main():
 
     log, best, step, t0 = [], (-1.0, None), 0, time.time()
     best_dir = os.path.join(a.out_dir, "model")
+
+    def check_dev(where):
+        nonlocal best
+        Pd = predict_proba(model, dv_ids, pad_id, device)
+        th = tune(Pd, dev)
+        _, res = eval_split(Pd, dev, th)
+        langs = [l for l in res if l != "ALL"]
+        sel = float(np.mean([res[l][1]["macro_f1"] for l in langs]))
+        log.append({"at": where, "dev_mean_macro_f1": round(sel, 4), "dev": {l: res[l][1] for l in res}, "thresholds": th, "minutes": round((time.time() - t0) / 60, 1)})
+        print(f"{where} dev mean macro F1 {sel:.3f}", {l: round(float(res[l][1]["macro_f1"]), 3) for l in res}, flush=True)
+        model.train()
+        if sel > best[0]:
+            best = (sel, where)
+            np.save(os.path.join(a.out_dir, "dev_probs.npy"), Pd)
+            if not a.no_test:
+                model.save_pretrained(best_dir); tok.save_pretrained(best_dir)
+                json.dump(th, open(os.path.join(best_dir, "thresholds.json"), "w"), indent=1)
+            print(f"  best so far ({where})", flush=True)
+
     for ep in range(1, a.epochs + 1):
         model.train(); run = 0.0
         bl = batches(tr_ids, a.batch, True, a.seed + ep)
+        marks = {max(1, round(len(bl) * f)) for f in np.arange(a.eval_every, 1.0 + 1e-9, a.eval_every)} | {len(bl)}
         for bi, idx in enumerate(bl, 1):
             x, m = collate(tr_ids, idx, pad_id, device)
             y, w = Y[idx].to(device), W[idx].to(device)
@@ -168,28 +190,22 @@ def main():
             if bi % 200 == 0 or bi == len(bl):
                 el = time.time() - t0
                 print(f"epoch {ep} batch {bi}/{len(bl)} loss {run:.4f} elapsed {el / 60:.1f} min, about {el / step * (steps - step) / 60:.0f} min left", flush=True)
-        Pd = predict_proba(model, dv_ids, pad_id, device)
-        th = tune(Pd, dev)
-        _, res = eval_split(Pd, dev, th)
-        langs = [l for l in res if l != "ALL"]
-        sel = float(np.mean([res[l][1]["macro_f1"] for l in langs]))
-        log.append({"epoch": ep, "dev_mean_macro_f1": round(sel, 4), "dev": {l: res[l][1] for l in res}, "thresholds": th, "minutes": round((time.time() - t0) / 60, 1)})
-        print(f"epoch {ep} dev mean macro F1 {sel:.3f}", {l: res[l][1]["primary_acc"] for l in res}, flush=True)
-        if sel > best[0]:
-            best = (sel, ep)
-            model.save_pretrained(best_dir); tok.save_pretrained(best_dir)
-            json.dump(th, open(os.path.join(best_dir, "thresholds.json"), "w"), indent=1)
-            print(f"  saved epoch {ep} as best", flush=True)
+            if bi in marks:
+                check_dev(f"epoch {ep - 1 + bi / len(bl):.2f}")
     json.dump(log, open(os.path.join(a.out_dir, "train_log.json"), "w"), indent=1)
+    json.dump({"best_dev_mean_macro_f1": round(best[0], 4), "best_at": best[1], "args": vars(a)}, open(os.path.join(a.out_dir, "summary.json"), "w"), indent=1)
+    if a.no_test:
+        print("sweep run: best dev mean macro F1", round(best[0], 4), "at", best[1]); return
 
     from transformers import AutoModelForSequenceClassification
     model = AutoModelForSequenceClassification.from_pretrained(best_dir).to(device)
     th = json.load(open(os.path.join(best_dir, "thresholds.json")))
     P = predict_proba(model, te_ids, pad_id, device)
+    np.save(os.path.join(a.out_dir, "test_probs.npy"), P)
     preds, res = eval_split(P, test, th)
     write_outputs(a, test, P, preds, res, th, best, train, dev)
     for l, (_, s, _) in res.items():
-        print("TEST", l, s)
+        print("TEST", l, {k: (round(float(v), 3) if isinstance(v, float) else v) for k, v in s.items()})
 
 
 def write_outputs(a, test, P, preds, res, th, best, train, dev):
@@ -207,7 +223,7 @@ def write_outputs(a, test, P, preds, res, th, best, train, dev):
                 w.writerow(["afroxlmr", l, o["label"], o["precision"], o["recall"], o["f1"], o["support"], o["predicted"]])
             w.writerow(["afroxlmr", l, "SUMMARY", "", "", s["macro_f1"], s["n"], ""])
     L = [f"# AfroXLMR domain classifier: test results", "",
-         f"Model `{a.model}`, best epoch {best[1]} of {a.epochs} (dev mean macro F1 {best[0]:.3f}); max length {a.max_len}, batch {a.batch}, lr {a.lr}.",
+         f"Model `{a.model}`, best checkpoint at {best[1]} of {a.epochs} epochs (dev mean macro F1 {best[0]:.3f}); max length {a.max_len}, batch {a.batch}, lr {a.lr}.",
          f"Training rows {len(train):,} (at most {a.cap_per_cell} per language and label), dev {len(dev):,}, test {len(test):,} (human labels).", "",
          "Thresholds (shared, then per-language overrides):", ""]
     L += [f"- {k}: " + ", ".join(f"{d} {t}" for d, t in v.items()) for k, v in th.items()]
