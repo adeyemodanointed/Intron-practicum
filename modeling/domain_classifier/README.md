@@ -6,7 +6,29 @@ One model labels a text in **Swahili (`swa`), Kinyarwanda (`kin`), Nigerian Pidg
 
 It was built for the CMU-Africa MSIT practicum with Intron, to sort domain text for multilingual QA-pair generation. Igbo was left out by team decision.
 
-## Results (22 October 2026)
+## Results (1 November 2026, v8, the current model)
+
+Model: AfroXLMR-base, two-stage training, six outputs. Top-label accuracy on 4,716 human-labelled texts, each predicted by a model that did not train on it (5-fold cross-validation). **Validated** means 1,042 texts the team labelled by hand, mostly from sources the rest of the training data barely covers; they also join cross-validation, so each model trains on validated texts from the other folds. No AI-written text is used in training.
+
+| Language | Test texts | AfroXLMR v8 | TF-IDF v8 | Validated only (AfroXLMR) |
+|---|---:|---:|---:|---:|
+| Kinyarwanda | 930 | 78.6% | 71.2% | 79.2% |
+| Swahili | 454 | 83.5% | 79.1% | none |
+| Nigerian Pidgin | 2,585 | 86.8% | 88.4% | 66.4% |
+| Yoruba | 747 | 80.7% | 81.7% | 71.6% |
+| **All** | **4,716** | **83.9%** | **83.0%** | **72.6%** |
+
+Validated texts by domain (AfroXLMR / TF-IDF): agriculture 83.3% / 74.6%, finance 65.3% / 50.5%, health 83.1% / 81.8%, law 76.9% / 71.6%, telecoms 87.1% / 83.5%, other 56.7% / 64.7%. On validated texts AfroXLMR beats TF-IDF by 3.3 points (p = 0.024). The best open LLM, Gemma 3 12B, scored 73.1% on an earlier test set; the LLMs still need re-running on this one, and the latest Gemini and GPT have not been run.
+
+**Change since the 22 October version, on the same texts:** Kinyarwanda 71.9% to 77.9% (p = 0.002), Pidgin 86.2% to 89.4% (p < 0.001), Swahili 77.5% to 80.0% (p = 0.35), these three together 82.7% to 86.3% (p < 0.001). TF-IDF improved about as much on these texts (86.5%). Yoruba can only be compared against the TF-IDF part of the old version, because its AfroXLMR weights were not kept: 70.5% to 80.7% on all 747 real texts (p < 0.001), but 72.1% to 71.6% on validated texts, with finance falling from 83.9% to 48.4% and law from 82.8% to 67.2%, because real Yoruba has only 8 finance training texts.
+
+**Known weak spots:** Pidgin validated `other` 41.7%, Kinyarwanda telecoms 47% (19 texts), Yoruba validated finance 48.4% (31 texts), two-domain texts (both found in 4 of 17).
+
+**v9 experiment (label cleaning plus FineWeb-2):** no significant change for AfroXLMR (84.1% and 72.6%; p = 0.66 and 0.94), so v8 stays. See `results/eval_v9/SUMMARY.md`. Model weights and data are not in this repository.
+
+Scripts for this version: `build_domain_data.py --v4 --team-validated --relabel data_v3/multi_silver.jsonl --out data_v8`, then `kaggle_v3/k_v8/v8.py`, `cv_collect.py` and `evaluate_domain.py`. Sections below describe the 22 October version unless they say otherwise.
+
+## Earlier results (22 October 2026)
 
 Top label correct means the model's first label matches a human label. All test texts were held out from training.
 

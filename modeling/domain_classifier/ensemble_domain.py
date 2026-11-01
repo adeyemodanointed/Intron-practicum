@@ -1,20 +1,35 @@
-"""Combine several AfroXLMR runs (different seeds) and, optionally, the TF-IDF model into one classifier.
+"""Combine several AfroXLMR runs (different seeds) and, optionally, the TF-IDF model into one classifier
+(v2 dev/test protocol; the cross-validated v3 runs use cv_collect.py).
 
     python ensemble_domain.py --runs runs/seed13 runs/seed14 runs/seed15 --tfidf model/domain_classifier.joblib --out results/ensemble
 
 Each run directory needs dev_probs.npy and test_probs.npy (written by train_afroxlmr_domain.py, same data files).
 Steps: average the AfroXLMR runs; mix with TF-IDF as (1 - w) * AfroXLMR + w * TF-IDF, choosing w on dev
 from 0, 0.25, 0.5, 0.75, 1; tune per-domain thresholds on dev; score the test set once.
-Writes report.md, metrics.csv and thresholds.json (with the chosen weight) to --out.
+Writes report.md, metrics.csv, test_predictions.csv and thresholds.json (with the chosen weight) to --out.
 """
 import argparse, csv, json, os
 
 import numpy as np
 
-from train_afroxlmr_domain import eval_split, load
-from train_domain_classifier import tune
+from domain_model import DOMAINS, decide_labels
+from train_domain_classifier import confusion, score, tune
 
 HERE = os.path.dirname(os.path.abspath(__file__))
+
+
+def load(data_dir, split):
+    return [json.loads(l) for l in open(os.path.join(data_dir, f"domain_{split}.jsonl"), encoding="utf-8")]
+
+
+def eval_split(P, rows, thresholds):
+    preds = decide_labels(P, [r["language"] for r in rows], thresholds)
+    res = {}
+    for l in sorted({r["language"] for r in rows}) + ["ALL"]:
+        idx = [i for i, r in enumerate(rows) if (l == "ALL" and r["label_source"].startswith("gold")) or r["language"] == l]
+        rs, ps = [rows[i] for i in idx], [preds[i] for i in idx]
+        res[l] = (*score(rs, ps), confusion(rs, ps))
+    return preds, res
 
 
 def mean_dev_f1(P, rows):
@@ -48,6 +63,12 @@ def main():
     preds, res = eval_split(Pt, test, th)
     os.makedirs(a.out, exist_ok=True)
     json.dump({"tfidf_weight": w, "runs": a.runs, "thresholds": th}, open(os.path.join(a.out, "thresholds.json"), "w"), indent=1)
+    with open(os.path.join(a.out, "test_predictions.csv"), "w", encoding="utf-8-sig", newline="") as f:
+        cw = csv.writer(f)
+        cw.writerow(["id", "language", "source", "human_labels", "predicted_labels", "correct_primary", "exact"] + [f"p_{d}" for d in DOMAINS] + ["text"])
+        for r, p, row in zip(test, preds, Pt):
+            cw.writerow([r["id"], r["language"], r["source"], "|".join(r["labels"]), "|".join(p), p[0] in r["labels"], set(p) == set(r["labels"])]
+                        + [round(float(x), 3) for x in row] + [r["text"]])
     with open(os.path.join(a.out, "metrics.csv"), "w", encoding="utf-8", newline="") as f:
         cw = csv.writer(f)
         cw.writerow(["language", "label", "precision", "recall", "f1", "support", "predicted"])

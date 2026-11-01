@@ -1,0 +1,73 @@
+system,language,multi_n,both_found,multi_exact,single_n,false_second,pred_multi
+base_v8,kin,0,0,0,574,6,6
+base_v8,kin (validated),1,0,0,355,17,17
+base_v8,pcm,0,0,0,2258,3,3
+base_v8,pcm (validated),0,0,0,327,3,3
+base_v8,swa,16,4,4,438,11,15
+base_v8,yor,0,0,0,388,1,1
+base_v8,yor (validated),0,0,0,359,9,9
+base_v8,ALL,17,4,4,4699,50,54
+base_v8,ALL (validated),1,0,0,1041,29,29
+tfidf6_v8,kin,0,0,0,574,27,27
+tfidf6_v8,kin (validated),1,0,0,355,20,20
+tfidf6_v8,pcm,0,0,0,2258,16,16
+tfidf6_v8,pcm (validated),0,0,0,327,13,13
+tfidf6_v8,swa,16,4,4,438,11,15
+tfidf6_v8,yor,0,0,0,388,2,2
+tfidf6_v8,yor (validated),0,0,0,359,14,14
+tfidf6_v8,ALL,17,4,4,4699,103,107
+tfidf6_v8,ALL (validated),1,0,0,1041,47,47
+ensemble_v8,kin,0,0,0,574,21,21
+ensemble_v8,kin (validated),1,0,0,355,17,17
+ensemble_v8,pcm,0,0,0,2258,13,13
+ensemble_v8,pcm (validated),0,0,0,327,10,10
+ensemble_v8,swa,16,4,4,438,8,12
+ensemble_v8,yor,0,0,0,388,3,3
+ensemble_v8,yor (validated),0,0,0,359,10,10
+ensemble_v8,ALL,17,4,4,4699,82,86
+ensemble_v8,ALL (validated),1,0,0,1041,37,37
+tfidf6_v8clean,kin,0,0,0,574,37,37
+tfidf6_v8clean,kin (validated),1,0,0,355,25,25
+tfidf6_v8clean,pcm,0,0,0,2258,13,13
+tfidf6_v8clean,pcm (validated),0,0,0,327,13,13
+tfidf6_v8clean,swa,16,5,5,438,13,18
+tfidf6_v8clean,yor,0,0,0,388,1,1
+tfidf6_v8clean,yor (validated),0,0,0,359,11,11
+tfidf6_v8clean,ALL,17,5,5,4699,113,118
+tfidf6_v8clean,ALL (validated),1,0,0,1041,49,49
+tfidf6_v9,kin,0,0,0,574,30,30
+tfidf6_v9,kin (validated),1,0,0,355,19,19
+tfidf6_v9,pcm,0,0,0,2258,12,12
+tfidf6_v9,pcm (validated),0,0,0,327,11,11
+tfidf6_v9,swa,16,4,4,438,16,20
+tfidf6_v9,yor,0,0,0,388,1,1
+tfidf6_v9,yor (validated),0,0,0,359,9,9
+tfidf6_v9,ALL,17,4,4,4699,98,102
+tfidf6_v9,ALL (validated),1,0,0,1041,39,39
+tfidf6_v9clean,kin,0,0,0,574,27,27
+tfidf6_v9clean,kin (validated),1,0,0,355,24,24
+tfidf6_v9clean,pcm,0,0,0,2258,13,13
+tfidf6_v9clean,pcm (validated),0,0,0,327,12,12
+tfidf6_v9clean,swa,16,5,5,438,16,21
+tfidf6_v9clean,yor,0,0,0,388,1,1
+tfidf6_v9clean,yor (validated),0,0,0,359,9,9
+tfidf6_v9clean,ALL,17,5,5,4699,102,107
+tfidf6_v9clean,ALL (validated),1,0,0,1041,45,45
+base_v9clean,kin,0,0,0,574,5,5
+base_v9clean,kin (validated),1,0,0,355,15,15
+base_v9clean,pcm,0,0,0,2258,2,2
+base_v9clean,pcm (validated),0,0,0,327,2,2
+base_v9clean,swa,16,6,6,438,9,15
+base_v9clean,yor,0,0,0,388,3,3
+base_v9clean,yor (validated),0,0,0,359,10,10
+base_v9clean,ALL,17,6,6,4699,46,52
+base_v9clean,ALL (validated),1,0,0,1041,27,27
+ensemble_v9clean,kin,0,0,0,574,10,10
+ensemble_v9clean,kin (validated),1,0,0,355,25,25
+ensemble_v9clean,pcm,0,0,0,2258,5,5
+ensemble_v9clean,pcm (validated),0,0,0,327,2,2
+ensemble_v9clean,swa,16,5,5,438,13,18
+ensemble_v9clean,yor,0,0,0,388,5,5
+ensemble_v9clean,yor (validated),0,0,0,359,16,16
+ensemble_v9clean,ALL,17,5,5,4699,76,81
+ensemble_v9clean,ALL (validated),1,0,0,1041,43,43

@@ -1,0 +1,217 @@
+system,language,label,n,accuracy,precision,f1,predicted
+tfidf6_v8,kin,agriculture,102,0.8529,0.725,0.7838,120
+tfidf6_v8,kin,finance,82,0.8049,0.6055,0.6911,109
+tfidf6_v8,kin,health,97,0.6907,0.6321,0.6601,106
+tfidf6_v8,kin,law,176,0.9659,0.8995,0.9315,189
+tfidf6_v8,kin,telecoms,19,0.4737,0.9,0.6207,10
+tfidf6_v8,kin,other,98,0.3469,0.5075,0.4121,67
+tfidf6_v8,kin (validated),agriculture,45,0.6444,0.7838,0.7073,37
+tfidf6_v8,kin (validated),finance,50,0.38,0.5429,0.4471,35
+tfidf6_v8,kin (validated),health,55,0.6182,0.7556,0.68,45
+tfidf6_v8,kin (validated),law,111,0.8198,0.7647,0.7913,119
+tfidf6_v8,kin (validated),telecoms,35,0.7429,0.6341,0.6842,41
+tfidf6_v8,kin (validated),other,61,0.7213,0.4444,0.55,99
+tfidf6_v8,pcm,agriculture,0,,0.0,,1
+tfidf6_v8,pcm,finance,225,0.7467,0.8528,0.7962,197
+tfidf6_v8,pcm,health,246,0.8293,0.8571,0.843,238
+tfidf6_v8,pcm,law,11,0.9091,0.1786,0.2985,56
+tfidf6_v8,pcm,telecoms,8,1.0,0.5714,0.7273,14
+tfidf6_v8,pcm,other,1768,0.9463,0.9463,0.9463,1768
+tfidf6_v8,pcm (validated),agriculture,37,0.7838,0.725,0.7532,40
+tfidf6_v8,pcm (validated),finance,20,0.9,0.3158,0.4675,57
+tfidf6_v8,pcm (validated),health,41,0.9268,0.7308,0.8172,52
+tfidf6_v8,pcm (validated),law,54,0.5185,0.7568,0.6154,37
+tfidf6_v8,pcm (validated),telecoms,48,0.9583,0.8519,0.902,54
+tfidf6_v8,pcm (validated),other,127,0.5354,0.68,0.5991,100
+tfidf6_v8,swa,agriculture,71,0.9437,0.8375,0.8874,80
+tfidf6_v8,swa,finance,70,0.8,0.8116,0.8058,69
+tfidf6_v8,swa,health,75,0.9467,0.9103,0.9281,78
+tfidf6_v8,swa,law,73,0.6986,0.8095,0.75,63
+tfidf6_v8,swa,telecoms,76,0.8158,0.747,0.7799,83
+tfidf6_v8,swa,other,105,0.5619,0.6146,0.5871,96
+tfidf6_v8,yor,agriculture,0,,,,0
+tfidf6_v8,yor,finance,0,,,,0
+tfidf6_v8,yor,health,80,0.7625,0.8133,0.7871,75
+tfidf6_v8,yor,law,0,,0.0,,10
+tfidf6_v8,yor,telecoms,0,,0.0,,1
+tfidf6_v8,yor,other,308,0.9253,0.9375,0.9314,304
+tfidf6_v8,yor (validated),agriculture,44,0.8182,0.7347,0.7742,49
+tfidf6_v8,yor (validated),finance,31,0.4516,0.7,0.549,20
+tfidf6_v8,yor (validated),health,52,0.9423,0.7101,0.8099,69
+tfidf6_v8,yor (validated),law,64,0.7031,0.8491,0.7692,53
+tfidf6_v8,yor (validated),telecoms,56,0.7857,0.8462,0.8148,52
+tfidf6_v8,yor (validated),other,112,0.7321,0.6308,0.6777,130
+tfidf6_v8,ALL,agriculture,299,0.8294,0.7584,0.7923,327
+tfidf6_v8,ALL,finance,478,0.7134,0.7002,0.7067,487
+tfidf6_v8,ALL,health,646,0.8111,0.7903,0.8006,663
+tfidf6_v8,ALL,law,489,0.8078,0.7495,0.7776,527
+tfidf6_v8,ALL,telecoms,242,0.8058,0.7647,0.7847,255
+tfidf6_v8,ALL,other,2579,0.8705,0.8756,0.873,2564
+tfidf6_v8,ALL (validated),agriculture,126,0.746,0.746,0.746,126
+tfidf6_v8,ALL (validated),finance,101,0.505,0.4554,0.4789,112
+tfidf6_v8,ALL (validated),health,148,0.8176,0.7289,0.7707,166
+tfidf6_v8,ALL (validated),law,229,0.7162,0.7847,0.7489,209
+tfidf6_v8,ALL (validated),telecoms,139,0.8345,0.7891,0.8112,147
+tfidf6_v8,ALL (validated),other,300,0.6467,0.5897,0.6169,329
+tfidf6_v8clean,kin,agriculture,102,0.902,0.7302,0.807,126
+tfidf6_v8clean,kin,finance,82,0.8293,0.5913,0.6904,115
+tfidf6_v8clean,kin,health,97,0.732,0.6455,0.686,110
+tfidf6_v8clean,kin,law,176,0.9716,0.9048,0.937,189
+tfidf6_v8clean,kin,telecoms,19,0.4737,0.9,0.6207,10
+tfidf6_v8clean,kin,other,98,0.3878,0.623,0.478,61
+tfidf6_v8clean,kin (validated),agriculture,45,0.7111,0.7442,0.7273,43
+tfidf6_v8clean,kin (validated),finance,50,0.46,0.5227,0.4894,44
+tfidf6_v8clean,kin (validated),health,55,0.6182,0.7556,0.68,45
+tfidf6_v8clean,kin (validated),law,111,0.8198,0.7778,0.7982,117
+tfidf6_v8clean,kin (validated),telecoms,35,0.6857,0.6486,0.6667,37
+tfidf6_v8clean,kin (validated),other,61,0.7541,0.4842,0.5897,95
+tfidf6_v8clean,pcm,agriculture,0,,0.0,,1
+tfidf6_v8clean,pcm,finance,225,0.7422,0.8789,0.8048,190
+tfidf6_v8clean,pcm,health,246,0.8374,0.8729,0.8548,236
+tfidf6_v8clean,pcm,law,11,0.9091,0.2,0.3279,50
+tfidf6_v8clean,pcm,telecoms,8,0.875,0.5385,0.6667,13
+tfidf6_v8clean,pcm,other,1768,0.9548,0.9478,0.9513,1781
+tfidf6_v8clean,pcm (validated),agriculture,37,0.7838,0.7073,0.7436,41
+tfidf6_v8clean,pcm (validated),finance,20,0.9,0.3273,0.48,55
+tfidf6_v8clean,pcm (validated),health,41,0.9268,0.6909,0.7917,55
+tfidf6_v8clean,pcm (validated),law,54,0.4815,0.7879,0.5977,33
+tfidf6_v8clean,pcm (validated),telecoms,48,0.9167,0.88,0.898,50
+tfidf6_v8clean,pcm (validated),other,127,0.5669,0.6792,0.618,106
+tfidf6_v8clean,swa,agriculture,71,0.9437,0.8375,0.8874,80
+tfidf6_v8clean,swa,finance,70,0.8,0.8,0.8,70
+tfidf6_v8clean,swa,health,75,0.9467,0.9342,0.9404,76
+tfidf6_v8clean,swa,law,73,0.6986,0.8226,0.7556,62
+tfidf6_v8clean,swa,telecoms,76,0.8816,0.7528,0.8121,89
+tfidf6_v8clean,swa,other,105,0.5714,0.6316,0.6,95
+tfidf6_v8clean,yor,agriculture,0,,,,0
+tfidf6_v8clean,yor,finance,0,,,,0
+tfidf6_v8clean,yor,health,80,0.7625,0.8133,0.7871,75
+tfidf6_v8clean,yor,law,0,,0.0,,9
+tfidf6_v8clean,yor,telecoms,0,,0.0,,1
+tfidf6_v8clean,yor,other,308,0.9253,0.9375,0.9314,304
+tfidf6_v8clean,yor (validated),agriculture,44,0.7727,0.7391,0.7556,46
+tfidf6_v8clean,yor (validated),finance,31,0.4839,0.7895,0.6,19
+tfidf6_v8clean,yor (validated),health,52,0.9038,0.7344,0.8103,64
+tfidf6_v8clean,yor (validated),law,64,0.7031,0.8654,0.7759,52
+tfidf6_v8clean,yor (validated),telecoms,56,0.8036,0.8491,0.8257,53
+tfidf6_v8clean,yor (validated),other,112,0.7679,0.6324,0.6935,136
+tfidf6_v8clean,ALL,agriculture,299,0.8495,0.7537,0.7987,337
+tfidf6_v8clean,ALL,finance,478,0.7259,0.7039,0.7147,493
+tfidf6_v8clean,ALL,health,646,0.8173,0.7988,0.808,661
+tfidf6_v8clean,ALL,law,489,0.8057,0.7695,0.7872,512
+tfidf6_v8clean,ALL,telecoms,242,0.8099,0.7747,0.7919,253
+tfidf6_v8clean,ALL,other,2579,0.8821,0.8825,0.8823,2578
+tfidf6_v8clean,ALL (validated),agriculture,126,0.754,0.7308,0.7422,130
+tfidf6_v8clean,ALL (validated),finance,101,0.5545,0.4746,0.5114,118
+tfidf6_v8clean,ALL (validated),health,148,0.8041,0.7256,0.7628,164
+tfidf6_v8clean,ALL (validated),law,229,0.7074,0.802,0.7517,202
+tfidf6_v8clean,ALL (validated),telecoms,139,0.8129,0.8071,0.81,140
+tfidf6_v8clean,ALL (validated),other,300,0.68,0.6053,0.6405,337
+tfidf6_v9,kin,agriculture,102,0.8725,0.712,0.7841,125
+tfidf6_v9,kin,finance,82,0.8171,0.6036,0.6943,111
+tfidf6_v9,kin,health,97,0.6701,0.6311,0.65,103
+tfidf6_v9,kin,law,176,0.9659,0.9043,0.9341,188
+tfidf6_v9,kin,telecoms,19,0.4211,0.7273,0.5333,11
+tfidf6_v9,kin,other,98,0.3673,0.5455,0.439,66
+tfidf6_v9,kin (validated),agriculture,45,0.6667,0.7895,0.7229,38
+tfidf6_v9,kin (validated),finance,50,0.38,0.5588,0.4524,34
+tfidf6_v9,kin (validated),health,55,0.6,0.75,0.6667,44
+tfidf6_v9,kin (validated),law,111,0.8018,0.7672,0.7841,116
+tfidf6_v9,kin (validated),telecoms,35,0.6571,0.6053,0.6301,38
+tfidf6_v9,kin (validated),other,61,0.7541,0.4381,0.5542,105
+tfidf6_v9,pcm,agriculture,0,,0.0,,2
+tfidf6_v9,pcm,finance,225,0.7556,0.8543,0.8019,199
+tfidf6_v9,pcm,health,246,0.8496,0.8566,0.8531,244
+tfidf6_v9,pcm,law,11,0.9091,0.2381,0.3774,42
+tfidf6_v9,pcm,telecoms,8,1.0,0.5333,0.6957,15
+tfidf6_v9,pcm,other,1768,0.9502,0.9502,0.9502,1768
+tfidf6_v9,pcm (validated),agriculture,37,0.7568,0.7179,0.7368,39
+tfidf6_v9,pcm (validated),finance,20,0.85,0.3208,0.4658,53
+tfidf6_v9,pcm (validated),health,41,0.9024,0.7551,0.8222,49
+tfidf6_v9,pcm (validated),law,54,0.4074,0.7857,0.5366,28
+tfidf6_v9,pcm (validated),telecoms,48,0.8958,0.8776,0.8866,49
+tfidf6_v9,pcm (validated),other,127,0.6142,0.65,0.6316,120
+tfidf6_v9,swa,agriculture,71,0.9437,0.8375,0.8874,80
+tfidf6_v9,swa,finance,70,0.8,0.7778,0.7887,72
+tfidf6_v9,swa,health,75,0.9467,0.9103,0.9281,78
+tfidf6_v9,swa,law,73,0.7123,0.8254,0.7647,63
+tfidf6_v9,swa,telecoms,76,0.8158,0.7294,0.7702,85
+tfidf6_v9,swa,other,105,0.5714,0.625,0.597,96
+tfidf6_v9,yor,agriculture,0,,,,0
+tfidf6_v9,yor,finance,0,,,,0
+tfidf6_v9,yor,health,80,0.725,0.8788,0.7945,66
+tfidf6_v9,yor,law,0,,0.0,,9
+tfidf6_v9,yor,telecoms,0,,0.0,,1
+tfidf6_v9,yor,other,308,0.9448,0.9297,0.9372,313
+tfidf6_v9,yor (validated),agriculture,44,0.7727,0.7391,0.7556,46
+tfidf6_v9,yor (validated),finance,31,0.3548,0.7857,0.4889,14
+tfidf6_v9,yor (validated),health,52,0.8846,0.8364,0.8598,55
+tfidf6_v9,yor (validated),law,64,0.6719,0.86,0.7544,50
+tfidf6_v9,yor (validated),telecoms,56,0.8036,0.8333,0.8182,54
+tfidf6_v9,yor (validated),other,112,0.8036,0.604,0.6897,149
+tfidf6_v9,ALL,agriculture,299,0.8294,0.7515,0.7886,330
+tfidf6_v9,ALL,finance,478,0.7113,0.7039,0.7076,483
+tfidf6_v9,ALL,health,646,0.8034,0.8122,0.8078,639
+tfidf6_v9,ALL,law,489,0.7894,0.7782,0.7838,496
+tfidf6_v9,ALL,telecoms,242,0.781,0.747,0.7636,253
+tfidf6_v9,ALL,other,2579,0.8845,0.8716,0.878,2617
+tfidf6_v9,ALL (validated),agriculture,126,0.7302,0.748,0.739,123
+tfidf6_v9,ALL (validated),finance,101,0.4653,0.4653,0.4653,101
+tfidf6_v9,ALL (validated),health,148,0.7838,0.7838,0.7838,148
+tfidf6_v9,ALL (validated),law,229,0.6725,0.7938,0.7281,194
+tfidf6_v9,ALL (validated),telecoms,139,0.7986,0.7872,0.7929,141
+tfidf6_v9,ALL (validated),other,300,0.7133,0.5722,0.635,374
+tfidf6_v9clean,kin,agriculture,102,0.902,0.7419,0.8142,124
+tfidf6_v9clean,kin,finance,82,0.8293,0.6071,0.701,112
+tfidf6_v9clean,kin,health,97,0.6907,0.6569,0.6734,102
+tfidf6_v9clean,kin,law,176,0.9659,0.8995,0.9315,189
+tfidf6_v9clean,kin,telecoms,19,0.4737,0.9,0.6207,10
+tfidf6_v9clean,kin,other,98,0.4184,0.6406,0.5062,64
+tfidf6_v9clean,kin (validated),agriculture,45,0.6889,0.7561,0.7209,41
+tfidf6_v9clean,kin (validated),finance,50,0.5,0.5556,0.5263,45
+tfidf6_v9clean,kin (validated),health,55,0.6,0.75,0.6667,44
+tfidf6_v9clean,kin (validated),law,111,0.8198,0.7583,0.7879,120
+tfidf6_v9clean,kin (validated),telecoms,35,0.6857,0.6667,0.6761,36
+tfidf6_v9clean,kin (validated),other,61,0.7213,0.4681,0.5677,94
+tfidf6_v9clean,pcm,agriculture,0,,0.0,,1
+tfidf6_v9clean,pcm,finance,225,0.7467,0.8889,0.8116,189
+tfidf6_v9clean,pcm,health,246,0.8455,0.8525,0.849,244
+tfidf6_v9clean,pcm,law,11,0.9091,0.2326,0.3704,43
+tfidf6_v9clean,pcm,telecoms,8,0.75,0.4615,0.5714,13
+tfidf6_v9clean,pcm,other,1768,0.9548,0.9478,0.9513,1781
+tfidf6_v9clean,pcm (validated),agriculture,37,0.7568,0.7,0.7273,40
+tfidf6_v9clean,pcm (validated),finance,20,0.8,0.3137,0.4507,51
+tfidf6_v9clean,pcm (validated),health,41,0.9024,0.7551,0.8222,49
+tfidf6_v9clean,pcm (validated),law,54,0.4074,0.7586,0.5301,29
+tfidf6_v9clean,pcm (validated),telecoms,48,0.9167,0.8627,0.8889,51
+tfidf6_v9clean,pcm (validated),other,127,0.5984,0.6387,0.6179,119
+tfidf6_v9clean,swa,agriculture,71,0.9437,0.8375,0.8874,80
+tfidf6_v9clean,swa,finance,70,0.8,0.7887,0.7943,71
+tfidf6_v9clean,swa,health,75,0.9467,0.8987,0.9221,79
+tfidf6_v9clean,swa,law,73,0.7123,0.8,0.7536,65
+tfidf6_v9clean,swa,telecoms,76,0.8816,0.7444,0.8072,90
+tfidf6_v9clean,swa,other,105,0.5333,0.6222,0.5744,90
+tfidf6_v9clean,yor,agriculture,0,,,,0
+tfidf6_v9clean,yor,finance,0,,,,0
+tfidf6_v9clean,yor,health,80,0.7125,0.8382,0.7703,68
+tfidf6_v9clean,yor,law,0,,0.0,,9
+tfidf6_v9clean,yor,telecoms,0,,0.0,,1
+tfidf6_v9clean,yor,other,308,0.9351,0.926,0.9305,311
+tfidf6_v9clean,yor (validated),agriculture,44,0.6818,0.75,0.7143,40
+tfidf6_v9clean,yor (validated),finance,31,0.3548,0.7857,0.4889,14
+tfidf6_v9clean,yor (validated),health,52,0.8846,0.8519,0.8679,54
+tfidf6_v9clean,yor (validated),law,64,0.6719,0.86,0.7544,50
+tfidf6_v9clean,yor (validated),telecoms,56,0.8036,0.8491,0.8257,53
+tfidf6_v9clean,yor (validated),other,112,0.8036,0.5732,0.6691,157
+tfidf6_v9clean,ALL,agriculture,299,0.8294,0.7607,0.7936,326
+tfidf6_v9clean,ALL,finance,478,0.7197,0.7137,0.7167,482
+tfidf6_v9clean,ALL,health,646,0.8034,0.8109,0.8072,640
+tfidf6_v9clean,ALL,law,489,0.7935,0.7683,0.7807,505
+tfidf6_v9clean,ALL,telecoms,242,0.8058,0.7677,0.7863,254
+tfidf6_v9clean,ALL,other,2579,0.8852,0.8727,0.8789,2616
+tfidf6_v9clean,ALL (validated),agriculture,126,0.7063,0.7355,0.7206,121
+tfidf6_v9clean,ALL (validated),finance,101,0.5149,0.4727,0.4929,110
+tfidf6_v9clean,ALL (validated),health,148,0.7838,0.7891,0.7864,147
+tfidf6_v9clean,ALL (validated),law,229,0.6812,0.7839,0.729,199
+tfidf6_v9clean,ALL (validated),telecoms,139,0.8129,0.8071,0.81,140
+tfidf6_v9clean,ALL (validated),other,300,0.7,0.5676,0.6269,370

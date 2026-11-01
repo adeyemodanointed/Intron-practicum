@@ -1,0 +1,1 @@
+{"id": "bmsofficial/domain-v3-tfidf", "title": "domain-v3-tfidf", "code_file": "tfidf.py", "language": "python", "kernel_type": "script", "is_private": true, "enable_gpu": false, "enable_internet": false, "dataset_sources": ["bmsofficial/domain-classifier-data-v3"], "competition_sources": [], "kernel_sources": []}

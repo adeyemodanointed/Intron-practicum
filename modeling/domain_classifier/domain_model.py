@@ -3,7 +3,9 @@ loaded by predict_domain.py).
 
 Labels: agriculture, finance, health, law, telecoms, or other.
 A text gets every domain whose probability reaches that domain's threshold (at most MAX_LABELS,
-highest first). If no domain reaches its threshold the text is `other`. Thresholds are tuned per language
+highest first), so one text can have several domains. If no domain reaches its threshold the text is `other`.
+Models with a sixth `other` output (other_output=True here, head multi6 in train_afroxlmr_domain.py) also call a
+text `other` when p(other) beats the best domain by at least `other_margin`. Thresholds are tuned per language
 where that language has enough dev examples of the domain; otherwise the shared ("all") threshold is used.
 
 Features: word 1-2 grams + character 3-5 grams (TF-IDF) on lower-cased text with diacritics removed,
@@ -54,9 +56,29 @@ def fold(text):
     return "".join(ch for ch in t if not unicodedata.combining(ch))
 
 
+def th_for(thresholds, lang):
+    th = dict(thresholds["all"])
+    th.update(thresholds.get(lang, {}))
+    return th
+
+
+def decide_labels(P, langs, thresholds, max_labels=MAX_LABELS):
+    """P: n x 5 (domains) or n x 6 (domains + other). Returns one label list per row, top label first."""
+    out = []
+    for row, lang in zip(P, langs):
+        th = th_for(thresholds, lang)
+        order = np.argsort(-row[: len(DOMAINS)])
+        picked = [DOMAINS[k] for k in order if row[k] >= th[DOMAINS[k]]][:max_labels]
+        if len(row) > len(DOMAINS) and picked and row[len(DOMAINS)] - row[order[0]] >= th.get("other_margin", 0.0):
+            picked = []
+        out.append(picked or [OTHER])
+    return out
+
+
 class DomainClassifier:
-    def __init__(self, C=4.0, word_max=200_000, char_max=300_000, augment=False):
+    def __init__(self, C=4.0, word_max=200_000, char_max=300_000, augment=False, other_output=False):
         self.C, self.word_max, self.char_max, self.augment = C, word_max, char_max, augment
+        self.other_output = other_output
         self.langs = []
         self.thresholds = {"all": {d: 0.5 for d in DOMAINS}}   # plus optional per-language overrides
         self.models = {}
@@ -87,28 +109,23 @@ class DomainClassifier:
         from sklearn.linear_model import LogisticRegression
         X = self._x(texts, langs, fit=True)
         w = np.asarray(weights, dtype=float)
-        for d in DOMAINS:
+        for d in self.outputs():
             y = np.array([d in ls for ls in labels], dtype=int)
             self.models[d] = LogisticRegression(C=self.C, class_weight="balanced", max_iter=3000, solver="liblinear").fit(X, y, sample_weight=w)
         return self
 
+    def outputs(self):
+        return LABELS if getattr(self, "other_output", False) else DOMAINS
+
     def proba(self, texts, langs):
         X = self._x(texts, langs)
-        return np.column_stack([self.models[d].predict_proba(X)[:, 1] for d in DOMAINS])
+        return np.column_stack([self.models[d].predict_proba(X)[:, 1] for d in self.outputs()])
 
     def th_for(self, lang):
-        th = dict(self.thresholds["all"])
-        th.update(self.thresholds.get(lang, {}))
-        return th
+        return th_for(self.thresholds, lang)
 
     def decide(self, P, langs, max_labels=MAX_LABELS):
-        out = []
-        for row, lang in zip(P, langs):
-            th = self.th_for(lang)
-            order = np.argsort(-row)
-            picked = [DOMAINS[k] for k in order if row[k] >= th[DOMAINS[k]]][:max_labels]
-            out.append(picked or [OTHER])
-        return out
+        return decide_labels(P, langs, self.thresholds, max_labels)
 
     def predict(self, texts, langs):
         return self.decide(self.proba(texts, langs), langs)

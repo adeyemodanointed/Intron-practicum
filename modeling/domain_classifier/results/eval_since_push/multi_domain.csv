@@ -1,0 +1,17 @@
+system,language,multi_n,both_found,multi_exact,single_n,false_second,pred_multi
+pushed_oct22,kin,0,0,0,385,1,1
+pushed_oct22,pcm,0,0,0,1533,2,2
+pushed_oct22,swa,9,0,0,231,0,0
+pushed_oct22,ALL,9,0,0,2149,3,3
+base_v8,kin,0,0,0,385,4,4
+base_v8,pcm,0,0,0,1533,3,3
+base_v8,swa,9,1,1,231,3,4
+base_v8,ALL,9,1,1,2149,10,11
+ensemble_v8,kin,0,0,0,385,12,12
+ensemble_v8,pcm,0,0,0,1533,10,10
+ensemble_v8,swa,9,3,3,231,2,5
+ensemble_v8,ALL,9,3,3,2149,24,27
+tfidf_v8,kin,0,0,0,385,15,15
+tfidf_v8,pcm,0,0,0,1533,9,9
+tfidf_v8,swa,9,2,2,231,1,3
+tfidf_v8,ALL,9,2,2,2149,25,27

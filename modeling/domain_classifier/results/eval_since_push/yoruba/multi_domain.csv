@@ -1,0 +1,17 @@
+system,language,multi_n,both_found,multi_exact,single_n,false_second,pred_multi
+pushed_tfidf,yor,0,0,0,388,3,3
+pushed_tfidf,yor (validated),0,0,0,359,7,7
+pushed_tfidf,ALL,0,0,0,747,10,10
+pushed_tfidf,ALL (validated),0,0,0,359,7,7
+base_v8,yor,0,0,0,388,1,1
+base_v8,yor (validated),0,0,0,359,9,9
+base_v8,ALL,0,0,0,747,10,10
+base_v8,ALL (validated),0,0,0,359,9,9
+tfidf_v8,yor,0,0,0,388,2,2
+tfidf_v8,yor (validated),0,0,0,359,14,14
+tfidf_v8,ALL,0,0,0,747,16,16
+tfidf_v8,ALL (validated),0,0,0,359,14,14
+ensemble_v8,yor,0,0,0,388,3,3
+ensemble_v8,yor (validated),0,0,0,359,10,10
+ensemble_v8,ALL,0,0,0,747,13,13
+ensemble_v8,ALL (validated),0,0,0,359,10,10

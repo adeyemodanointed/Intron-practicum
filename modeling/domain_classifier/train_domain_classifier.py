@@ -3,10 +3,18 @@
     python train_domain_classifier.py              # one model for every language
     python train_domain_classifier.py --compare    # also train one model per language on the same data, for comparison
     python train_domain_classifier.py --augment    # add per-language feature copies (tried; no clear gain, see README)
+    python train_domain_classifier.py --data-dir data_v3 --cv results/cv/tfidf          # 5-fold cross-validation
+    python train_domain_classifier.py --data-dir data_v3 --cv results/cv/tfidf6 --other-output
 
 Input : data/domain_{train,dev,test}.jsonl (from build_domain_data.py)
 Output: model/domain_classifier.joblib, model/thresholds.json
         results/metrics.csv, results/test_predictions.csv, results/report.md
+--cv DIR: for each fold k, train on domain_train.jsonl plus the eval rows of the three training folds (all but test
+fold k and dev fold k+1), whose human labels get --gold-share of each language's training weight; save
+probabilities for every eval row to DIR/fold{k}/eval_probs.npy. With several --gold-share values, the one with the best
+dev-fold mean macro F1 is kept per fold. DIR/stage1/eval_probs.npy is the model trained without any eval rows.
+--folds -1 trains the final model (folds 1-4, dev fold 0) and saves DIR/final/domain_classifier.joblib.
+Score with cv_collect.py, then evaluate_domain.py.
 
 Sample weights: gold 1.0, teacher 0.8, weak 0.5; then rescaled so every language has the same total weight
 (Kinyarwanda has 2-5x more training rows than the others).
@@ -20,15 +28,37 @@ import argparse, collections, csv, json, os, time
 import joblib
 import numpy as np
 
-from domain_model import DOMAINS, LABELS, OTHER, DomainClassifier
+from domain_model import DOMAINS, LABELS, OTHER, DomainClassifier, decide_labels
 
 HERE = os.path.dirname(os.path.abspath(__file__))
 KIND_W = {"gold": 1.0, "teacher": 0.8, "weak": 0.5}
 MIN_DEV_POS = 5
+N_FOLDS = 5
+DATA_DIR = os.path.join(HERE, "data")
 
 
-def load(split):
-    return [json.loads(l) for l in open(os.path.join(HERE, "data", f"domain_{split}.jsonl"), encoding="utf-8")]
+def load(split, data_dir=None):
+    return [json.loads(l) for l in open(os.path.join(data_dir or DATA_DIR, f"domain_{split}.jsonl"), encoding="utf-8")]
+
+
+def fold_split(rows, k):
+    """Indices of the test fold k, the dev fold k+1 and the three training folds of domain_eval.jsonl."""
+    te = [i for i, r in enumerate(rows) if r["fold"] == k]
+    dv = [i for i, r in enumerate(rows) if r["fold"] == (k + 1) % N_FOLDS]
+    tr = [i for i, r in enumerate(rows) if r["fold"] not in (k, (k + 1) % N_FOLDS)]
+    return tr, dv, te
+
+
+def boost(w, rows, mask, share):
+    """Rescale weights so the rows in `mask` carry `share` of each language's total weight."""
+    w = np.asarray(w, dtype=float).copy()
+    for l in {r["language"] for r in rows}:
+        lang = np.array([r["language"] == l for r in rows])
+        m, rest = lang & mask, lang & ~mask
+        if m.any() and rest.any():
+            tot = w[lang].sum()
+            w[m] *= share * tot / w[m].sum(); w[rest] *= (1 - share) * tot / w[rest].sum()
+    return w
 
 
 def weights(rows):
@@ -49,7 +79,27 @@ def tune(P, rows):
         own = tune_one(P[idx], [rows[i] for i in idx], min_pos=MIN_DEV_POS)
         if own:
             th[l] = own
+    if P.shape[1] > len(DOMAINS):
+        tune_margin(P, rows, th)
     return th
+
+
+def tune_margin(P, rows, th, grid=np.round(np.arange(-0.5, 0.51, 0.05), 3)):
+    """Six-output models: how far p(other) must beat the best domain to call a text `other` (shared, then per language)."""
+    langs = [r["language"] for r in rows]
+    by = {l: [i for i, x in enumerate(langs) if x == l] for l in sorted(set(langs))}
+
+    def f1(idx, m, lang=None):
+        t = {k: dict(v) for k, v in th.items()}
+        (t.setdefault(lang, {}) if lang else t["all"])["other_margin"] = m
+        preds = decide_labels(P[idx], [langs[i] for i in idx], t)
+        return score([rows[i] for i in idx], preds)[1]["macro_f1"]
+
+    th["all"]["other_margin"] = max(grid, key=lambda m: (np.mean([f1(ix, m) for ix in by.values()]), -abs(m)))
+    for l, ix in by.items():
+        if sum(OTHER in rows[i]["labels"] for i in ix) >= MIN_DEV_POS:
+            th.setdefault(l, {})["other_margin"] = float(max(grid, key=lambda m: (f1(ix, m, l), -abs(m))))
+    th["all"]["other_margin"] = float(th["all"]["other_margin"])
 
 
 def tune_one(P, rows, min_pos):
@@ -99,6 +149,48 @@ def confusion(rows, preds):
     return {(g, p): m[(g, p)] for g in LABELS for p in LABELS}
 
 
+def mean_macro_f1(P, rows, th):
+    preds = decide_labels(P, [r["language"] for r in rows], th)
+    langs = sorted({r["language"] for r in rows})
+    return float(np.mean([score([r for r in rows if r["language"] == l], [p for r, p in zip(rows, preds) if r["language"] == l])[1]["macro_f1"]
+                          for l in langs]))
+
+
+def cross_validate(a):
+    pool, ev = load("train", a.data_dir), load("eval", a.data_dir)
+    texts, langs = [r["text"] for r in ev], [r["language"] for r in ev]
+
+    def fit(rows, w):
+        return DomainClassifier(other_output=a.other_output).fit([r["text"] for r in rows], [r["language"] for r in rows], [r["labels"] for r in rows], w)
+
+    s1 = os.path.join(a.cv, "stage1"); os.makedirs(s1, exist_ok=True)
+    if not os.path.exists(os.path.join(s1, "eval_probs.npy")):
+        t0 = time.time()
+        np.save(os.path.join(s1, "eval_probs.npy"), fit(pool, weights(pool)).proba(texts, langs))
+        print(f"[stage1] {len(pool)} rows, {time.time() - t0:.0f}s", flush=True)
+    log = {}
+    for k in a.folds:
+        tr, dv, _ = fold_split(ev, k)
+        rows = pool + [ev[i] for i in tr]
+        mask = np.array([False] * len(pool) + [ev[i]["label_source"].startswith("gold") for i in tr])
+        tried, best = {}, None
+        for share in a.gold_share:
+            t0 = time.time()
+            m = fit(rows, boost(weights(rows), rows, mask, share))
+            P = m.proba(texts, langs)
+            f = mean_macro_f1(P[dv], [ev[i] for i in dv], tune(P[dv], [ev[i] for i in dv]))
+            tried[share] = round(f, 4)
+            print(f"[fold {k}] gold share {share}: dev mean macro F1 {f:.3f} ({time.time() - t0:.0f}s)", flush=True)
+            if best is None or f > best[0]:
+                best = (f, share, P, m)
+        d = os.path.join(a.cv, f"fold{k}" if k >= 0 else "final"); os.makedirs(d, exist_ok=True)
+        np.save(os.path.join(d, "eval_probs.npy"), best[2])
+        if k < 0:   # final model: trained on folds 1-4, dev fold 0
+            joblib.dump(best[3], os.path.join(d, "domain_classifier.joblib"), compress=3)
+        log[k] = {"gold_share_tried": tried, "gold_share": best[1], "dev_mean_macro_f1": round(best[0], 4)}
+    json.dump({"other_output": a.other_output, "folds": log}, open(os.path.join(a.cv, "cv_log.json"), "w"), indent=1)
+
+
 def fit_eval(train, dev, test, tag, augment=False):
     t0 = time.time()
     m = DomainClassifier(augment=augment).fit([r["text"] for r in train], [r["language"] for r in train], [r["labels"] for r in train], weights(train))
@@ -113,8 +205,15 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--compare", action="store_true", help="also train a separate model per language")
     ap.add_argument("--augment", action="store_true", help="shared + per-language feature copies")
+    ap.add_argument("--data-dir", default=DATA_DIR)
+    ap.add_argument("--cv", help="5-fold cross-validation; write probabilities to this directory")
+    ap.add_argument("--other-output", action="store_true", help="--cv: add a sixth `other` output")
+    ap.add_argument("--gold-share", type=float, nargs="+", default=[0.3], help="--cv: share of each language's weight for fold gold rows")
+    ap.add_argument("--folds", type=int, nargs="*", default=list(range(N_FOLDS)), help="--cv: folds to run (-1 = final model; none = stage 1 only)")
     a = ap.parse_args()
-    train, dev, test = load("train"), load("dev"), load("test")
+    if a.cv:
+        return cross_validate(a)
+    train, dev, test = load("train", a.data_dir), load("dev", a.data_dir), load("test", a.data_dir)
     langs = sorted({r["language"] for r in test})
     os.makedirs(os.path.join(HERE, "model"), exist_ok=True); os.makedirs(os.path.join(HERE, "results"), exist_ok=True)
 

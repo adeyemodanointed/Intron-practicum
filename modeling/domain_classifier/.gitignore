@@ -8,3 +8,10 @@ client_notebook/
 *.npy
 *test_predictions.csv
 __pycache__/
+data_*/
+review/
+friend_brief/
+*.parquet
+*.part1
+*.part2
+issues.csv

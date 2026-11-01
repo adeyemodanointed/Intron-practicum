@@ -1,0 +1,97 @@
+# Domain classifier evaluation
+
+Top-label accuracy: the top prediction is one of the human labels. Balanced accuracy: the mean of the per-domain accuracies, so every domain counts equally. Brackets: 95% bootstrap interval. `ALL` = human-labelled texts only.
+
+## Summary
+
+| System | Language | n | Top-label accuracy | Balanced accuracy | Macro F1 | Exact set | Label-set F1 |
+|---|---|---:|---:|---:|---:|---:|---:|
+| tfidf_v8 | kin | 574 | 74.2% [70.6%–77.7%] | 68.9% [64.2%–74.1%] | 0.683 | 71.4% | 0.741 |
+| tfidf_v8 | kin (validated) | 356 | 66.3% [61.5%–71.3%] | 65.4% [60.0%–70.3%] | 0.643 | 62.6% | 0.664 |
+| tfidf_v8 | pcm | 2258 | 91.3% [90.1%–92.5%] | 88.6% [84.5%–91.6%] | 0.722 | 90.7% | 0.911 |
+| tfidf_v8 | pcm (validated) | 327 | 67.9% [62.4%–72.8%] | 77.0% [72.1%–81.7%] | 0.692 | 66.7% | 0.685 |
+| tfidf_v8 | swa | 454 | 79.1% [75.1%–82.6%] | 79.4% [76.1%–82.9%] | 0.790 | 75.1% | 0.782 |
+| tfidf_v8 | yor | 388 | 89.2% [85.8%–92.0%] | 84.4% [79.3%–89.1%] | 0.859 | 88.9% | 0.891 |
+| tfidf_v8 | yor (validated) | 359 | 73.5% [68.8%–78.0%] | 73.9% [69.4%–78.8%] | 0.732 | 71.3% | 0.739 |
+| tfidf_v8 | ALL | 4716 | 83.0% [82.0%–84.0%] | 80.6% [79.2%–82.0%] | 0.789 | 81.4% | 0.829 |
+| tfidf_v8 | ALL (validated) | 1042 | 69.3% [66.6%–72.2%] | 71.1% [68.3%–74.0%] | 0.695 | 66.9% | 0.696 |
+| base_v8 | kin | 574 | 78.2% [74.7%–81.4%] | 71.5% [66.7%–76.4%] | 0.726 | 77.7% | 0.782 |
+| base_v8 | kin (validated) | 356 | 79.2% [75.3%–83.4%] | 77.9% [73.4%–82.5%] | 0.764 | 75.3% | 0.783 |
+| base_v8 | pcm | 2258 | 89.7% [88.5%–90.9%] | 84.6% [77.6%–89.6%] | 0.667 | 89.7% | 0.897 |
+| base_v8 | pcm (validated) | 327 | 66.4% [60.9%–71.3%] | 76.9% [72.0%–80.9%] | 0.682 | 66.1% | 0.663 |
+| base_v8 | swa | 454 | 83.5% [80.2%–87.0%] | 83.4% [80.3%–86.6%] | 0.825 | 79.3% | 0.824 |
+| base_v8 | yor | 388 | 89.2% [86.1%–92.3%] | 82.1% [76.8%–87.1%] | 0.865 | 89.2% | 0.892 |
+| base_v8 | yor (validated) | 359 | 71.6% [66.9%–76.3%] | 71.9% [66.8%–76.7%] | 0.710 | 70.5% | 0.718 |
+| base_v8 | ALL | 4716 | 83.9% [82.8%–84.9%] | 82.6% [81.1%–84.1%] | 0.802 | 83.0% | 0.837 |
+| base_v8 | ALL (validated) | 1042 | 72.6% [69.9%–75.2%] | 75.4% [72.7%–78.0%] | 0.726 | 70.7% | 0.723 |
+
+## Accuracy per domain
+
+Accuracy = of the texts a person gave this domain, the share the model also gave it. Precision = of the texts the model gave this domain, the share that are right. Blank = no texts of that domain in this test set.
+
+### tfidf_v8
+
+| Language | agriculture | finance | health | law | telecoms | other |
+|---|---|---|---|---|---|---|
+| kin | 85.3% (n=102) | 80.5% (n=82) | 69.1% (n=97) | 96.6% (n=176) | 47.4% (n=19) | 34.7% (n=98) |
+| kin (validated) | 64.4% (n=45) | 38.0% (n=50) | 61.8% (n=55) | 82.0% (n=111) | 74.3% (n=35) | 72.1% (n=61) |
+| pcm |  | 74.7% (n=225) | 82.9% (n=246) | 90.9% (n=11) | 100.0% (n=8) | 94.6% (n=1768) |
+| pcm (validated) | 78.4% (n=37) | 90.0% (n=20) | 92.7% (n=41) | 51.9% (n=54) | 95.8% (n=48) | 53.5% (n=127) |
+| swa | 94.4% (n=71) | 80.0% (n=70) | 94.7% (n=75) | 69.9% (n=73) | 81.6% (n=76) | 56.2% (n=105) |
+| yor |  |  | 76.2% (n=80) |  |  | 92.5% (n=308) |
+| yor (validated) | 81.8% (n=44) | 45.2% (n=31) | 94.2% (n=52) | 70.3% (n=64) | 78.6% (n=56) | 73.2% (n=112) |
+| ALL | 82.9% (n=299) | 71.3% (n=478) | 81.1% (n=646) | 80.8% (n=489) | 80.6% (n=242) | 87.0% (n=2579) |
+| ALL (validated) | 74.6% (n=126) | 50.5% (n=101) | 81.8% (n=148) | 71.6% (n=229) | 83.5% (n=139) | 64.7% (n=300) |
+
+### base_v8
+
+| Language | agriculture | finance | health | law | telecoms | other |
+|---|---|---|---|---|---|---|
+| kin | 92.2% (n=102) | 73.2% (n=82) | 69.1% (n=97) | 97.2% (n=176) | 47.4% (n=19) | 50.0% (n=98) |
+| kin (validated) | 80.0% (n=45) | 66.0% (n=50) | 76.4% (n=55) | 92.8% (n=111) | 88.6% (n=35) | 63.9% (n=61) |
+| pcm |  | 72.0% (n=225) | 79.3% (n=246) | 90.9% (n=11) | 87.5% (n=8) | 93.5% (n=1768) |
+| pcm (validated) | 83.8% (n=37) | 90.0% (n=20) | 90.2% (n=41) | 55.6% (n=54) | 100.0% (n=48) | 41.7% (n=127) |
+| swa | 94.4% (n=71) | 87.1% (n=70) | 97.3% (n=75) | 71.2% (n=73) | 88.2% (n=76) | 61.9% (n=105) |
+| yor |  |  | 70.0% (n=80) |  |  | 94.2% (n=308) |
+| yor (validated) | 86.4% (n=44) | 48.4% (n=31) | 84.6% (n=52) | 67.2% (n=64) | 75.0% (n=56) | 69.6% (n=112) |
+| ALL | 89.0% (n=299) | 73.0% (n=478) | 79.6% (n=646) | 83.6% (n=489) | 84.3% (n=242) | 86.4% (n=2579) |
+| ALL (validated) | 83.3% (n=126) | 65.3% (n=101) | 83.1% (n=148) | 76.9% (n=229) | 87.1% (n=139) | 56.7% (n=300) |
+
+## Multi-domain texts
+
+| System | Language | Two-domain texts | Both domains found | Exact set | Single-domain texts | Given a wrong second label |
+|---|---|---:|---:|---:|---:|---:|
+| tfidf_v8 | kin | 0 | 0 | 0 | 574 | 27 (4.7%) |
+| tfidf_v8 | kin (validated) | 1 | 0 | 0 | 355 | 20 (5.6%) |
+| tfidf_v8 | pcm | 0 | 0 | 0 | 2258 | 16 (0.7%) |
+| tfidf_v8 | pcm (validated) | 0 | 0 | 0 | 327 | 13 (4.0%) |
+| tfidf_v8 | swa | 16 | 4 | 4 | 438 | 11 (2.5%) |
+| tfidf_v8 | yor | 0 | 0 | 0 | 388 | 2 (0.5%) |
+| tfidf_v8 | yor (validated) | 0 | 0 | 0 | 359 | 14 (3.9%) |
+| tfidf_v8 | ALL | 17 | 4 | 4 | 4699 | 103 (2.2%) |
+| tfidf_v8 | ALL (validated) | 1 | 0 | 0 | 1041 | 47 (4.5%) |
+| base_v8 | kin | 0 | 0 | 0 | 574 | 6 (1.0%) |
+| base_v8 | kin (validated) | 1 | 0 | 0 | 355 | 17 (4.8%) |
+| base_v8 | pcm | 0 | 0 | 0 | 2258 | 3 (0.1%) |
+| base_v8 | pcm (validated) | 0 | 0 | 0 | 327 | 3 (0.9%) |
+| base_v8 | swa | 16 | 4 | 4 | 438 | 11 (2.5%) |
+| base_v8 | yor | 0 | 0 | 0 | 388 | 1 (0.3%) |
+| base_v8 | yor (validated) | 0 | 0 | 0 | 359 | 9 (2.5%) |
+| base_v8 | ALL | 17 | 4 | 4 | 4699 | 50 (1.1%) |
+| base_v8 | ALL (validated) | 1 | 0 | 0 | 1041 | 29 (2.8%) |
+
+## Paired comparison against tfidf_v8
+
+Difference = system minus baseline on the same texts; p from the paired bootstrap (two-sided); McNemar = exact test on top-label correctness.
+
+| System | Language | Top-label accuracy diff (p) | Balanced accuracy diff (p) | Macro F1 diff (p) | McNemar p |
+|---|---|---:|---:|---:|---:|
+| base_v8 | kin | +4.0% (0.020) | +2.6% (0.320) | +0.043 (0.082) | 0.013 |
+| base_v8 | kin (validated) | +12.9% (0.000) | +12.5% (0.000) | +0.121 (0.000) | 0.000 |
+| base_v8 | pcm | -1.6% (0.004) | -4.0% (0.006) | -0.055 (0.002) | 0.005 |
+| base_v8 | pcm (validated) | -1.5% (0.520) | -0.2% (0.910) | -0.011 (0.566) | 0.583 |
+| base_v8 | swa | +4.4% (0.000) | +3.9% (0.016) | +0.035 (0.012) | 0.008 |
+| base_v8 | yor | +0.0% (1.000) | -2.3% (0.362) | +0.006 (0.816) | 1.000 |
+| base_v8 | yor (validated) | -1.9% (0.426) | -2.0% (0.466) | -0.022 (0.374) | 0.494 |
+| base_v8 | ALL | +0.9% (0.102) | +2.0% (0.008) | +0.013 (0.040) | 0.084 |
+| base_v8 | ALL (validated) | +3.3% (0.024) | +4.3% (0.004) | +0.031 (0.020) | 0.021 |

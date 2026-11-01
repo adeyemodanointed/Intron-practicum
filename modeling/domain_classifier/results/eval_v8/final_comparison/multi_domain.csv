@@ -1,0 +1,28 @@
+system,language,multi_n,both_found,multi_exact,single_n,false_second,pred_multi
+tfidf_v8,kin,0,0,0,574,27,27
+tfidf_v8,kin (validated),1,0,0,355,20,20
+tfidf_v8,pcm,0,0,0,2258,16,16
+tfidf_v8,pcm (validated),0,0,0,327,13,13
+tfidf_v8,swa,16,4,4,438,11,15
+tfidf_v8,yor,0,0,0,388,2,2
+tfidf_v8,yor (validated),0,0,0,359,14,14
+tfidf_v8,ALL,17,4,4,4699,103,107
+tfidf_v8,ALL (validated),1,0,0,1041,47,47
+base_v8,kin,0,0,0,574,6,6
+base_v8,kin (validated),1,0,0,355,17,17
+base_v8,pcm,0,0,0,2258,3,3
+base_v8,pcm (validated),0,0,0,327,3,3
+base_v8,swa,16,4,4,438,11,15
+base_v8,yor,0,0,0,388,1,1
+base_v8,yor (validated),0,0,0,359,9,9
+base_v8,ALL,17,4,4,4699,50,54
+base_v8,ALL (validated),1,0,0,1041,29,29
+ensemble_v8,kin,0,0,0,574,21,21
+ensemble_v8,kin (validated),1,0,0,355,17,17
+ensemble_v8,pcm,0,0,0,2258,13,13
+ensemble_v8,pcm (validated),0,0,0,327,10,10
+ensemble_v8,swa,16,4,4,438,8,12
+ensemble_v8,yor,0,0,0,388,3,3
+ensemble_v8,yor (validated),0,0,0,359,10,10
+ensemble_v8,ALL,17,4,4,4699,82,86
+ensemble_v8,ALL (validated),1,0,0,1041,37,37
