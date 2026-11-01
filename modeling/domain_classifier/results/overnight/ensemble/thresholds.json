@@ -1,0 +1,42 @@
+{
+ "tfidf_weight": 0.5,
+ "runs": [
+  "results/overnight/runs/seed13",
+  "results/overnight/runs/seed14",
+  "results/overnight/runs/seed15"
+ ],
+ "thresholds": {
+  "all": {
+   "agriculture": 0.575,
+   "finance": 0.5,
+   "health": 0.7,
+   "law": 0.575,
+   "telecoms": 0.775
+  },
+  "kin": {
+   "agriculture": 0.9,
+   "finance": 0.95,
+   "health": 0.95,
+   "law": 0.25,
+   "telecoms": 0.05
+  },
+  "pcm": {
+   "finance": 0.4,
+   "health": 0.2
+  },
+  "swa": {
+   "agriculture": 0.375,
+   "finance": 0.775,
+   "health": 0.225,
+   "law": 0.125,
+   "telecoms": 0.775
+  },
+  "yor": {
+   "agriculture": 0.475,
+   "finance": 0.35,
+   "health": 0.6,
+   "law": 0.525,
+   "telecoms": 0.675
+  }
+ }
+}

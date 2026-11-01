@@ -1,0 +1,13 @@
+system,vs,language,top_acc_diff,balanced_acc_diff,macro_f1_diff,exact_set_diff,label_set_f1_diff,top_acc_p,balanced_acc_p,macro_f1_p,exact_set_p,label_set_f1_p,mcnemar_p_top_acc
+base_v8,pushed_tfidf,yor,0.201,0.162,0.1238,0.201,0.1993,0.0,0.0,0.0,0.0,0.0,0.0
+base_v8,pushed_tfidf,yor (validated),-0.0056,-0.0554,-0.0279,-0.0056,-0.0037,0.956,0.068,0.316,0.94,0.96,0.9241
+base_v8,pushed_tfidf,ALL,0.1017,-0.0398,0.0374,0.1017,0.1017,0.0,0.186,0.096,0.0,0.0,0.0
+base_v8,pushed_tfidf,ALL (validated),-0.0056,-0.0554,-0.0279,-0.0056,-0.0037,0.854,0.05,0.264,0.842,0.884,0.9241
+tfidf_v8,pushed_tfidf,yor,0.201,0.1851,0.1182,0.1985,0.1985,0.0,0.0,0.0,0.0,0.0,0.0
+tfidf_v8,pushed_tfidf,yor (validated),0.0139,-0.0352,-0.0056,0.0028,0.0176,0.652,0.21,0.806,0.946,0.52,0.6849
+tfidf_v8,pushed_tfidf,ALL,0.1111,-0.0293,0.0581,0.1044,0.1116,0.0,0.282,0.012,0.0,0.0,0.0
+tfidf_v8,pushed_tfidf,ALL (validated),0.0139,-0.0352,-0.0056,0.0028,0.0176,0.656,0.174,0.812,0.968,0.508,0.6849
+ensemble_v8,pushed_tfidf,yor,0.2088,0.19,0.132,0.201,0.2045,0.0,0.0,0.0,0.0,0.0,0.0
+ensemble_v8,pushed_tfidf,yor (validated),0.0306,-0.0135,0.0114,0.0251,0.0325,0.282,0.63,0.634,0.39,0.234,0.3049
+ensemble_v8,pushed_tfidf,ALL,0.1232,-0.0014,0.0688,0.1165,0.1218,0.0,0.922,0.0,0.0,0.0,0.0
+ensemble_v8,pushed_tfidf,ALL (validated),0.0306,-0.0135,0.0114,0.0251,0.0325,0.288,0.578,0.65,0.37,0.234,0.3049

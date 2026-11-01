@@ -1,0 +1,1 @@
+{"id": "bmsofficial/domain-v3-ablations", "title": "domain-v3-ablations", "code_file": "ablations.py", "language": "python", "kernel_type": "script", "is_private": true, "enable_gpu": true, "enable_internet": true, "dataset_sources": ["bmsofficial/domain-classifier-data-v3"], "competition_sources": [], "kernel_sources": []}

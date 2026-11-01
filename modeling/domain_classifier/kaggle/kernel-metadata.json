@@ -1,0 +1,1 @@
+{"id": "bmsofficial/afroxlmr-domain-overnight", "title": "afroxlmr-domain-overnight", "code_file": "overnight.py", "language": "python", "kernel_type": "script", "is_private": true, "enable_gpu": true, "enable_internet": true, "dataset_sources": ["bmsofficial/domain-classifier-data-v2"], "competition_sources": [], "kernel_sources": []}

@@ -1,0 +1,26 @@
+system,language,multi_n,both_found,multi_exact,single_n,false_second,pred_multi
+tfidf6_full,kin,0,0,0,574,14,14
+tfidf6_full,pcm,0,0,0,2200,15,15
+tfidf6_full,swa,16,3,3,438,16,20
+tfidf6_full,yor (synthetic),0,0,0,3000,128,128
+tfidf6_full,ALL,16,3,3,3212,45,49
+tfidf_c_gold,kin,0,0,0,574,17,17
+tfidf_c_gold,pcm,0,0,0,2200,13,13
+tfidf_c_gold,swa,16,3,3,438,13,17
+tfidf_c_gold,yor (synthetic),0,0,0,3000,83,83
+tfidf_c_gold,ALL,16,3,3,3212,43,47
+base_b_plus_human_labels,kin,0,0,0,574,2,2
+base_b_plus_human_labels,pcm,0,0,0,2200,1,1
+base_b_plus_human_labels,swa,16,1,1,438,12,13
+base_b_plus_human_labels,yor (synthetic),0,0,0,3000,58,58
+base_b_plus_human_labels,ALL,16,1,1,3212,15,16
+base_c_plus_other_output,kin,0,0,0,574,3,3
+base_c_plus_other_output,pcm,0,0,0,2200,7,7
+base_c_plus_other_output,swa,16,2,2,438,15,17
+base_c_plus_other_output,yor (synthetic),0,0,0,3000,36,36
+base_c_plus_other_output,ALL,16,2,2,3212,25,27
+base_d_plus_news_data,kin,0,0,0,574,9,9
+base_d_plus_news_data,pcm,0,0,0,2200,6,6
+base_d_plus_news_data,swa,16,3,3,438,6,10
+base_d_plus_news_data,yor (synthetic),0,0,0,3000,45,45
+base_d_plus_news_data,ALL,16,3,3,3212,21,25

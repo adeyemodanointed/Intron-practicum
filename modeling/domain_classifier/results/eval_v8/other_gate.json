@@ -1,0 +1,158 @@
+{
+ "current": {
+  "ALL": {
+   "n": 4716,
+   "top_label_acc": 83.9,
+   "other_acc": 86.4,
+   "macro_f1": 0.761
+  },
+  "ALL (validated)": {
+   "n": 1042,
+   "top_label_acc": 72.6,
+   "other_acc": 56.7,
+   "macro_f1": 0.719
+  },
+  "pcm (validated)": {
+   "n": 327,
+   "top_label_acc": 66.4,
+   "other_acc": 41.7,
+   "macro_f1": 0.682
+  },
+  "kin": {
+   "n": 930,
+   "top_label_acc": 78.6,
+   "other_acc": 55.3,
+   "macro_f1": 0.754
+  }
+ },
+ "energy_T1": {
+  "ALL": {
+   "n": 4716,
+   "top_label_acc": 83.6,
+   "other_acc": 86.4,
+   "macro_f1": 0.756
+  },
+  "ALL (validated)": {
+   "n": 1042,
+   "top_label_acc": 72.0,
+   "other_acc": 57.0,
+   "macro_f1": 0.714
+  },
+  "pcm (validated)": {
+   "n": 327,
+   "top_label_acc": 66.4,
+   "other_acc": 41.7,
+   "macro_f1": 0.682
+  },
+  "kin": {
+   "n": 930,
+   "top_label_acc": 77.7,
+   "other_acc": 56.6,
+   "macro_f1": 0.743
+  }
+ },
+ "energy_T2": {
+  "ALL": {
+   "n": 4716,
+   "top_label_acc": 83.8,
+   "other_acc": 86.7,
+   "macro_f1": 0.759
+  },
+  "ALL (validated)": {
+   "n": 1042,
+   "top_label_acc": 72.4,
+   "other_acc": 58.3,
+   "macro_f1": 0.717
+  },
+  "pcm (validated)": {
+   "n": 327,
+   "top_label_acc": 66.4,
+   "other_acc": 41.7,
+   "macro_f1": 0.682
+  },
+  "kin": {
+   "n": 930,
+   "top_label_acc": 78.2,
+   "other_acc": 59.1,
+   "macro_f1": 0.75
+  }
+ },
+ "joint": {
+  "ALL": {
+   "n": 4716,
+   "top_label_acc": 83.7,
+   "other_acc": 86.6,
+   "macro_f1": 0.759
+  },
+  "ALL (validated)": {
+   "n": 1042,
+   "top_label_acc": 72.4,
+   "other_acc": 58.3,
+   "macro_f1": 0.718
+  },
+  "pcm (validated)": {
+   "n": 327,
+   "top_label_acc": 66.4,
+   "other_acc": 41.7,
+   "macro_f1": 0.682
+  },
+  "kin": {
+   "n": 930,
+   "top_label_acc": 78.1,
+   "other_acc": 59.1,
+   "macro_f1": 0.75
+  }
+ },
+ "p_other": {
+  "ALL": {
+   "n": 4716,
+   "top_label_acc": 83.8,
+   "other_acc": 86.4,
+   "macro_f1": 0.758
+  },
+  "ALL (validated)": {
+   "n": 1042,
+   "top_label_acc": 72.4,
+   "other_acc": 56.7,
+   "macro_f1": 0.717
+  },
+  "pcm (validated)": {
+   "n": 327,
+   "top_label_acc": 66.4,
+   "other_acc": 41.7,
+   "macro_f1": 0.682
+  },
+  "kin": {
+   "n": 930,
+   "top_label_acc": 78.5,
+   "other_acc": 54.7,
+   "macro_f1": 0.752
+  }
+ },
+ "energy_T1_no_margin": {
+  "ALL": {
+   "n": 4716,
+   "top_label_acc": 83.5,
+   "other_acc": 85.8,
+   "macro_f1": 0.754
+  },
+  "ALL (validated)": {
+   "n": 1042,
+   "top_label_acc": 71.9,
+   "other_acc": 55.7,
+   "macro_f1": 0.713
+  },
+  "pcm (validated)": {
+   "n": 327,
+   "top_label_acc": 66.4,
+   "other_acc": 40.9,
+   "macro_f1": 0.682
+  },
+  "kin": {
+   "n": 930,
+   "top_label_acc": 77.7,
+   "other_acc": 54.1,
+   "macro_f1": 0.743
+  }
+ }
+}

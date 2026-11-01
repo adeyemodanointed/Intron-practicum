@@ -1,0 +1,41 @@
+system,language,multi_n,both_found,multi_exact,single_n,false_second,pred_multi
+tfidf_v2_setup,kin,0,0,0,574,13,13
+tfidf_v2_setup,pcm,0,0,0,2200,16,16
+tfidf_v2_setup,swa,16,4,4,438,13,18
+tfidf_v2_setup,yor (synthetic),0,0,0,3000,117,117
+tfidf_v2_setup,ALL,16,4,4,3212,42,47
+tfidf_c_gold,kin,0,0,0,574,17,17
+tfidf_c_gold,pcm,0,0,0,2200,13,13
+tfidf_c_gold,swa,16,3,3,438,13,17
+tfidf_c_gold,yor (synthetic),0,0,0,3000,83,83
+tfidf_c_gold,ALL,16,3,3,3212,43,47
+base_a_v2_setup,kin,0,0,0,574,2,2
+base_a_v2_setup,pcm,0,0,0,2200,12,12
+base_a_v2_setup,swa,16,0,0,438,6,6
+base_a_v2_setup,yor (synthetic),0,0,0,3000,48,48
+base_a_v2_setup,ALL,16,0,0,3212,20,20
+base_b_plus_human_labels,kin,0,0,0,574,2,2
+base_b_plus_human_labels,pcm,0,0,0,2200,1,1
+base_b_plus_human_labels,swa,16,1,1,438,12,13
+base_b_plus_human_labels,yor (synthetic),0,0,0,3000,58,58
+base_b_plus_human_labels,ALL,16,1,1,3212,15,16
+base_c_plus_other_output,kin,0,0,0,574,3,3
+base_c_plus_other_output,pcm,0,0,0,2200,7,7
+base_c_plus_other_output,swa,16,2,2,438,15,17
+base_c_plus_other_output,yor (synthetic),0,0,0,3000,36,36
+base_c_plus_other_output,ALL,16,2,2,3212,25,27
+base_d_plus_news_data,kin,0,0,0,574,9,9
+base_d_plus_news_data,pcm,0,0,0,2200,6,6
+base_d_plus_news_data,swa,16,3,3,438,6,10
+base_d_plus_news_data,yor (synthetic),0,0,0,3000,45,45
+base_d_plus_news_data,ALL,16,3,3,3212,21,25
+base_e_plus_multi_domain,kin,0,0,0,574,8,8
+base_e_plus_multi_domain,pcm,0,0,0,2200,8,8
+base_e_plus_multi_domain,swa,16,5,5,438,20,27
+base_e_plus_multi_domain,yor (synthetic),0,0,0,3000,42,42
+base_e_plus_multi_domain,ALL,16,5,5,3212,36,43
+large_final,kin,0,0,0,574,1,1
+large_final,pcm,0,0,0,2200,13,13
+large_final,swa,16,3,3,438,9,12
+large_final,yor (synthetic),0,0,0,3000,44,44
+large_final,ALL,16,3,3,3212,23,26

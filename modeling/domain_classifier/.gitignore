@@ -1,0 +1,17 @@
+data/
+inputs/
+kaggle_upload/
+kaggle_v2/
+client_notebook/
+*.zip
+*.joblib
+*.npy
+*test_predictions.csv
+__pycache__/
+data_*/
+review/
+friend_brief/
+*.parquet
+*.part1
+*.part2
+issues.csv

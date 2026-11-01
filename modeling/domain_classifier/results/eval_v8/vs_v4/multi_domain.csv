@@ -1,0 +1,16 @@
+system,language,multi_n,both_found,multi_exact,single_n,false_second,pred_multi
+base_v4_mix,kin,0,0,0,574,8,8
+base_v4_mix,pcm,0,0,0,2200,7,7
+base_v4_mix,swa,16,3,3,438,7,10
+base_v4_mix,yor,0,0,0,388,0,0
+base_v4_mix,ALL,16,3,3,3600,22,25
+base_v8,kin,0,0,0,574,6,6
+base_v8,pcm,0,0,0,2200,3,3
+base_v8,swa,16,4,4,438,11,15
+base_v8,yor,0,0,0,388,1,1
+base_v8,ALL,16,4,4,3600,21,25
+tfidf6,kin,0,0,0,574,14,14
+tfidf6,pcm,0,0,0,2200,15,15
+tfidf6,swa,16,3,3,438,16,20
+tfidf6,yor,0,0,0,388,0,0
+tfidf6,ALL,16,3,3,3600,45,49

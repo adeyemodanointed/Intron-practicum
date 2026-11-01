@@ -1,0 +1,7 @@
+system,vs,language,top_acc_diff,balanced_acc_diff,macro_f1_diff,exact_set_diff,label_set_f1_diff,top_acc_p,balanced_acc_p,macro_f1_p,exact_set_p,label_set_f1_p,mcnemar_p_top_acc
+base_d_plus_news_data,tfidf6_full,kin,0.0226,0.0325,0.0265,0.0366,0.0296,0.11,0.038,0.176,0.012,0.028,0.148
+base_d_plus_news_data,tfidf6_full,pcm,-0.0082,-0.0128,-0.0084,-0.0036,-0.0058,0.13,0.24,0.356,0.53,0.272,0.1677
+base_d_plus_news_data,tfidf6_full,swa,0.0374,0.0281,0.034,0.0463,0.0345,0.026,0.084,0.026,0.018,0.03,0.027
+base_d_plus_news_data,tfidf6_full,yor,-0.0052,0.0153,0.0001,-0.0052,-0.0052,0.78,0.448,0.95,0.78,0.78,0.8388
+base_d_plus_news_data,tfidf6_full,yor (synthetic),0.003,-0.0047,-0.0007,0.024,0.0049,0.504,0.24,0.812,0.0,0.222,0.536
+base_d_plus_news_data,tfidf6_full,ALL,0.0028,0.0148,0.0056,0.0088,0.005,0.548,0.064,0.428,0.066,0.242,0.6022

@@ -1,0 +1,13 @@
+system,language,multi_n,both_found,multi_exact,single_n,false_second,pred_multi
+tfidf6_full,kin,0,0,0,574,14,14
+tfidf6_full,pcm,0,0,0,2200,15,15
+tfidf6_full,swa,16,3,3,438,16,20
+tfidf6_full,yor,0,0,0,388,0,0
+tfidf6_full,yor (synthetic),0,0,0,3000,128,128
+tfidf6_full,ALL,16,3,3,3600,45,49
+base_d_plus_news_data,kin,0,0,0,574,9,9
+base_d_plus_news_data,pcm,0,0,0,2200,6,6
+base_d_plus_news_data,swa,16,3,3,438,6,10
+base_d_plus_news_data,yor,0,0,0,388,0,0
+base_d_plus_news_data,yor (synthetic),0,0,0,3000,45,45
+base_d_plus_news_data,ALL,16,3,3,3600,21,25

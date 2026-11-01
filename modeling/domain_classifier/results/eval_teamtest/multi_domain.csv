@@ -1,0 +1,13 @@
+system,language,multi_n,both_found,multi_exact,single_n,false_second,pred_multi
+tfidf6_final,kin,1,0,0,322,0,0
+tfidf6_final,pcm,0,0,0,139,7,7
+tfidf6_final,yor,0,0,0,351,3,3
+tfidf6_final,ALL,1,0,0,812,10,10
+base_final_v3m,kin,1,0,0,322,20,20
+base_final_v3m,pcm,0,0,0,139,3,3
+base_final_v3m,yor,0,0,0,351,9,9
+base_final_v3m,ALL,1,0,0,812,32,32
+large_final_v3m,kin,1,1,1,322,7,8
+large_final_v3m,pcm,0,0,0,139,1,1
+large_final_v3m,yor,0,0,0,351,3,3
+large_final_v3m,ALL,1,1,1,812,11,12
