@@ -1,0 +1,21 @@
+# TF-IDF + logistic-regression baseline. It trains only on train and reports
+# validation learning curves; the protected test split remains untouched.
+data_path: data/splits/yoruba_synthetic/Data.csv.gz
+output_dir: modeling/domain_classification/yoruba/outputs/learning_curve
+
+text_column: Text
+domain_column: Domain
+split_column: Split
+source_column: Label_Source
+allowed_domains:
+  - Agriculture
+  - Finance
+  - Health
+  - Law
+  - Telecommunications
+
+# A balanced 2,000-row domain set becomes 1,400 train / 300 validation / 300
+# test rows per domain. The curve tests whether performance has plateaued.
+examples_per_domain: [350, 700, 1050, 1400]
+random_seed: 13
+max_features: 200000

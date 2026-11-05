@@ -1,0 +1,74 @@
+# Uses your GEMINI_API_KEY environment variable. Never put the key in this file.
+provider: gemini
+model: gemini-3.5-flash-lite
+
+# This is the exact seed-data input configured for bootstrap_classifier.py.
+output_path: data/generation/synthetic_text/yoruba/yoruba_synthetic_seed.csv
+
+# The next generated rows rotate across these sections. The existing 4,000
+# seed rows remain untouched; section metadata for new rows is written to the
+# sidecar *_sections.csv audit file.
+domains:
+  Agriculture:
+    - crop production and seasonal planning
+    - soil health and fertilizer use
+    - livestock and animal health
+    - pests, diseases, and crop protection
+    - irrigation and water management
+    - seeds, storage, and post-harvest handling
+    - agricultural markets and farm finance
+    - agricultural extension and farmer cooperatives
+  Finance:
+    - personal savings and budgeting
+    - banking services and account security
+    - mobile money and digital payments
+    - loans, credit, and interest
+    - insurance and risk management
+    - taxation and public finance
+    - investment and financial markets
+    - fraud prevention and consumer protection
+  Health:
+    - maternal, newborn, and pediatric health
+    - emergency care and first aid
+    - surgery and post-operative care
+    - anatomy and physiology education
+    - physiotherapy and rehabilitation
+    - cardiology and cardiovascular health
+    - infectious diseases and vaccination
+    - mental health and community wellbeing
+    - nutrition and public health
+  Law:
+    - constitutional rights and civic duties
+    - criminal law and public safety
+    - civil disputes and contracts
+    - family law and inheritance
+    - land, housing, and property law
+    - employment and labour law
+    - business regulation and consumer rights
+    - courts, evidence, and legal procedure
+  Telecommunications:
+    - mobile networks, coverage, and signal quality
+    - SIM registration, identity, and account security
+    - mobile data, broadband, and internet access
+    - calls, SMS, USSD, and customer service
+    - mobile network outages and service restoration
+    - 4G, 5G, fibre, and network infrastructure
+    - telecom tariffs, bundles, and billing
+    - telecom regulation, licensing, and consumer complaints
+
+# Five domains x 2,000 rows = 10,000 total seed rows. The generator resumes the
+# existing CSV, so it will add only the rows still required for each domain.
+examples_per_domain: 2000
+# Gemini may truncate a long JSON array; smaller batches make every response
+# comfortably fit within its output limit. The script continues until it reaches
+# examples_per_domain, so this does not change the final target.
+batch_size: 10
+min_words: 12
+# The manually reviewed Yoruba texts have a median of 41 words and a 90th
+# percentile of 56, so 60 better matches the real-data length range.
+max_words: 60
+temperature: 0.9
+# Ten 60-word Yoruba strings plus JSON require a larger response budget.
+max_tokens: 1800
+max_attempts_per_batch: 4
+pause_seconds: 1

@@ -1,0 +1,52 @@
+# Paths are relative to the Intron-practicum repository root.
+input_path: data/preprocessing/yoruba/raw/yor_corpus.csv.gz
+cleaned_output_path: data/preprocessing/yoruba/cleaned/yor_clean.csv.gz
+data_output_path: data/splits/yoruba/Data.csv.gz
+report_output_path: data/preprocessing/yoruba/yor_preprocessing_report.json
+
+# Ukachi's licensed-corpus schema already uses these column names.  Its split
+# field is normally blank, so preprocess.py derives a stable split by document.
+text_column: Text
+domain_column: Domain
+split_column: Split (train/dev)
+document_id_column: Document_ID
+required_columns:
+  - ID
+  - Language
+  - Source
+  - License
+  - Text
+  - Domain
+require_nonempty_columns:
+  - ID
+  - Language
+  - Source
+  - License
+
+# These are the five labels used for classifier training.  Evaluation data stays
+# outside this pipeline under evaluation/evaluation_data/.
+allowed_domains:
+  - Agriculture
+  - Finance
+  - Health
+  - Law
+  - Telecommunications
+domain_aliases:
+  agriculture: Agriculture
+  finance: Finance
+  health: Health
+  law: Law
+  telecommunications: Telecommunications
+
+# Preserve an existing split when there is one.  Otherwise derive a stable,
+# document-level split so sentences from the same article cannot leak across
+# train and validation.
+split_aliases:
+  train: train
+  dev: validation
+  validation: validation
+validation_fraction: 0.15
+split_seed: 13
+
+min_words: 3
+max_words: 120

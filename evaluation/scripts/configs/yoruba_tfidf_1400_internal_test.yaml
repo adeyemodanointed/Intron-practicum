@@ -1,0 +1,16 @@
+# The 1,400-per-domain TF-IDF model was selected by Yoruba validation macro-F1.
+# This config evaluates it once on the protected internal test split.
+data_path: data/splits/yoruba_synthetic/Data.csv.gz
+model_path: modeling/domain_classification/yoruba/outputs/learning_curve/domain_classifier_1400_per_domain.joblib
+output_dir: evaluation/results/yoruba/tfidf_1400_internal_test
+
+text_column: Text
+domain_column: Domain
+split_column: Split
+source_column: Label_Source
+labels:
+  - Agriculture
+  - Finance
+  - Health
+  - Law
+  - Telecommunications

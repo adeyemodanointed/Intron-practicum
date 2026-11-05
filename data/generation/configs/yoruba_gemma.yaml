@@ -1,0 +1,23 @@
+# Hosted Hugging Face model; you may replace this with another Gemma Instruct model
+# you have permission to use. Accept its access terms on Hugging Face before running.
+model: google/gemma-3-12b-it
+
+# This is the exact seed-data input configured for bootstrap_classifier.py.
+output_path: data/generation/synthetic_text/yoruba/yoruba_synthetic_seed.csv
+
+domains:
+  - Agriculture
+  - Finance
+  - Health
+  - Law
+  - Telecommunications
+
+# Start with 100 for a quick quality check. Change to 2000 only after reviewing it.
+examples_per_domain: 100
+batch_size: 25
+min_words: 12
+max_words: 35
+temperature: 0.9
+max_tokens: 1800
+max_attempts_per_batch: 4
+pause_seconds: 1

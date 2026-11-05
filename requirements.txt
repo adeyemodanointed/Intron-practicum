@@ -1,0 +1,19 @@
+# Shared dependencies for reusable project scripts.
+# Add model-specific libraries here only when their scripts are added.
+PyYAML>=6.0
+pandas>=2.0
+scikit-learn>=1.4
+joblib>=1.3
+# Used by data/generation/generate_synthetic.py to call a hosted Hugging Face model.
+huggingface_hub>=0.30
+# Used when the generator is configured with provider: gemini.
+google-genai>=1.0
+# Used to download the explicitly selected AfriDocMT training split.
+datasets>=3.0
+# Transformer fine-tuning for multilingual domain classification.
+torch>=2.3
+transformers>=4.45,<5
+accelerate>=1.0
+peft>=0.13
+# Local presentation demo for the trained domain classifiers.
+streamlit>=1.40

@@ -1,0 +1,23 @@
+# Diagnostic external evaluation of the selected model. It contains 254
+# manually reviewed five-domain rows; one exact match with training was removed
+# during export. Do not use this file for subsequent model selection/tuning.
+data_path: evaluation/evaluation_data/swahili/domain_evaluation.csv
+base_model_path: ../PnC/models/afro-xlmr-base
+adapter_path: modeling/domain_classification/swahili/outputs/afroxlmr_lora/best_adapter
+output_dir: evaluation/results/swahili/afroxlmr_lora_manual_external
+
+text_column: text
+domain_column: domain
+source_column: source
+evaluation_name: External reviewed evaluation
+result_prefix: external
+
+labels:
+  - Agriculture
+  - Finance
+  - Health
+  - Law
+  - Telecommunications
+
+max_length: 128
+batch_size: 8

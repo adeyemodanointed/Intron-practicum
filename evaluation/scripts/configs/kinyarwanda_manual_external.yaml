@@ -1,0 +1,17 @@
+# This config evaluates the selected TF-IDF baseline once on a separate,
+# manually reviewed Kinyarwanda set. It does not retrain or tune the model.
+data_path: evaluation/evaluation_data/kinyarwanda/domain_evaluation.csv
+model_path: modeling/domain_classification/kinyarwanda/outputs/learning_curve/domain_classifier_1050_per_domain.joblib
+output_dir: evaluation/results/kinyarwanda/tfidf_1050_manual_external
+
+text_column: text
+domain_column: domain
+source_column: source
+evaluate_all_rows: true
+
+labels:
+  - Agriculture
+  - Finance
+  - Health
+  - Law
+  - Telecommunications

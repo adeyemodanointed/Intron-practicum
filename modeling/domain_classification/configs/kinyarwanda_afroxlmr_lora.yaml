@@ -1,0 +1,31 @@
+# For a self-contained run, replace this local path with Davlan/afro-xlmr-base.
+# The supplied local checkpoint avoids re-downloading the 1.1 GB base weights.
+model_name_or_path: ../PnC/models/afro-xlmr-base
+data_path: data/splits/kinyarwanda/Data.csv.gz
+output_dir: modeling/domain_classification/kinyarwanda/outputs/afroxlmr_lora
+
+text_column: text
+domain_column: domain
+split_column: Split
+labels:
+  - Agriculture
+  - Finance
+  - Health
+  - Law
+  - Telecommunications
+
+max_length: 128
+train_batch_size: 4
+eval_batch_size: 8
+gradient_accumulation_steps: 4
+epochs: 8
+learning_rate: 0.0002
+weight_decay: 0.01
+warmup_ratio: 0.1
+early_stopping_patience: 2
+random_seed: 13
+
+lora_rank: 8
+lora_alpha: 16
+lora_dropout: 0.1
+lora_target_modules: [query, value]

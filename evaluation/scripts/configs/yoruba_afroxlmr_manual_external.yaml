@@ -1,0 +1,22 @@
+# Comparative external evaluation of the already-trained Yoruba AfroXLMR LoRA
+# adapter. Do not use this external set to select a different final model.
+data_path: evaluation/evaluation_data/yoruba/domain_evaluation.csv
+base_model_path: ../PnC/models/afro-xlmr-base
+adapter_path: modeling/domain_classification/yoruba/outputs/afroxlmr_lora/best_adapter
+output_dir: evaluation/results/yoruba/afroxlmr_lora_manual_external
+
+text_column: text
+domain_column: domain
+source_column: source
+evaluation_name: External evaluation
+result_prefix: external
+
+labels:
+  - Agriculture
+  - Finance
+  - Health
+  - Law
+  - Telecommunications
+
+max_length: 128
+batch_size: 8

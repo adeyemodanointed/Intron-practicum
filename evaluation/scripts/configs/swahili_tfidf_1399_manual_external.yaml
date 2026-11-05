@@ -1,0 +1,18 @@
+# External diagnostic baseline comparison for the validation-selected Swahili
+# TF-IDF model. This uses the same 254 reviewed, exact-overlap-filtered rows
+# already used for AfroXLMR. Do not use its result for further tuning.
+data_path: evaluation/evaluation_data/swahili/domain_evaluation.csv
+model_path: modeling/domain_classification/swahili/outputs/learning_curve/domain_classifier_1399_per_domain.joblib
+output_dir: evaluation/results/swahili/tfidf_1399_manual_external
+
+text_column: text
+domain_column: domain
+source_column: source
+evaluate_all_rows: true
+
+labels:
+  - Agriculture
+  - Finance
+  - Health
+  - Law
+  - Telecommunications

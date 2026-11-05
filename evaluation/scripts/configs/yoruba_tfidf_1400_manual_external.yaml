@@ -1,0 +1,17 @@
+# External diagnostic evaluation of the validation-selected Yoruba TF-IDF model.
+# This config never trains or tunes the classifier.
+data_path: evaluation/evaluation_data/yoruba/domain_evaluation.csv
+model_path: modeling/domain_classification/yoruba/outputs/learning_curve/domain_classifier_1400_per_domain.joblib
+output_dir: evaluation/results/yoruba/tfidf_1400_manual_external
+
+text_column: text
+domain_column: domain
+source_column: source
+evaluate_all_rows: true
+
+labels:
+  - Agriculture
+  - Finance
+  - Health
+  - Law
+  - Telecommunications

@@ -1,0 +1,31 @@
+data_path: data/splits/swahili/Data.csv.gz
+output_dir: modeling/domain_classification/swahili/outputs/afroxlmr_lora
+
+text_column: Text
+domain_column: Domain
+split_column: Split (train/dev)
+labels:
+  - Agriculture
+  - Finance
+  - Health
+  - Law
+  - Telecommunications
+
+# Reuse the local AfroXLMR checkpoint used in the Yoruba, Kinyarwanda, and
+# Pidgin runs. Replace with Davlan/afro-xlmr-base if the local copy is absent.
+model_name_or_path: ../PnC/models/afro-xlmr-base
+max_length: 128
+train_batch_size: 4
+eval_batch_size: 8
+gradient_accumulation_steps: 4
+epochs: 8
+learning_rate: 0.0002
+weight_decay: 0.01
+warmup_ratio: 0.1
+early_stopping_patience: 2
+random_seed: 13
+
+lora_rank: 8
+lora_alpha: 16
+lora_dropout: 0.1
+lora_target_modules: [query, value]

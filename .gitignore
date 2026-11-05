@@ -1,0 +1,35 @@
+# Python and editor state
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.sheet_work/
+
+# Exploratory/local notebooks and externally supplied working material
+scrape.ipynb
+Ukachi's stuff/
+
+# Raw, synthetic, cleaned, and split datasets (large and/or licence restricted)
+data/swa_domain_corpus.csv.gz
+data/generation/synthetic_text/
+data/preprocessing/**/raw/
+data/preprocessing/**/cleaned/
+data/preprocessing/**/*_preprocessing_report.json
+data/splits/
+
+# Manually reviewed evaluation data and generated evaluation outputs
+Practicum - Manual Validation.csv
+Practicum - Pidgin manaul evaluation.csv
+evaluation/evaluation_data/
+evaluation/results/
+
+# Trained models, checkpoints, predictions, logs, and other run artifacts
+modeling/domain_classification/**/outputs/
+outputs/
+*.log
+
+# Local environment and secrets
+.env
+.venv/
+venv/
+*.pem
+*.key

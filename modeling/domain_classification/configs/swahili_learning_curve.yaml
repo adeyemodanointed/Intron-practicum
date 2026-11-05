@@ -1,0 +1,19 @@
+# The 10,000-row Swahili corpus has a protected 70/15/15 split.  The curve
+# varies only training data; validation is fixed and test is never loaded here.
+data_path: data/splits/swahili/Data.csv.gz
+output_dir: modeling/domain_classification/swahili/outputs/learning_curve
+
+text_column: Text
+domain_column: Domain
+split_column: Split (train/dev)
+source_column: Source
+allowed_domains:
+  - Agriculture
+  - Finance
+  - Health
+  - Law
+  - Telecommunications
+
+examples_per_domain: [350, 700, 1050, 1399]
+random_seed: 13
+max_features: 200000

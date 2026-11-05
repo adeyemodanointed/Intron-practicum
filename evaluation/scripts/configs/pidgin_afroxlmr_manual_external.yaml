@@ -1,0 +1,22 @@
+# Final external evaluation of the trained Pidgin AfroXLMR LoRA adapter.
+# This reviewed set is never used for training, checkpoint selection, or tuning.
+data_path: evaluation/evaluation_data/pidgin/domain_evaluation.csv
+base_model_path: ../PnC/models/afro-xlmr-base
+adapter_path: modeling/domain_classification/pidgin/outputs/afroxlmr_lora/best_adapter
+output_dir: evaluation/results/pidgin/afroxlmr_lora_manual_external
+
+text_column: text
+domain_column: domain
+source_column: source
+evaluation_name: External evaluation
+result_prefix: external
+
+labels:
+  - Agriculture
+  - Finance
+  - Health
+  - Law
+  - Telecommunications
+
+max_length: 128
+batch_size: 8

@@ -1,0 +1,20 @@
+data_path: data/splits/kinyarwanda/Data.csv.gz
+output_dir: modeling/domain_classification/kinyarwanda/outputs/learning_curve
+
+text_column: text
+domain_column: domain
+split_column: Split
+source_column: source
+allowed_domains:
+  - Agriculture
+  - Finance
+  - Health
+  - Law
+  - Telecommunications
+
+# The complete 2,000-row domain set is split 70/15/15 into train/validation/test
+# (about 1,400/300/300 rows). The curve varies only the training amount while
+# holding validation fixed; the test split stays untouched by this script.
+examples_per_domain: [350, 700, 1050, 1400]
+random_seed: 13
+max_features: 200000

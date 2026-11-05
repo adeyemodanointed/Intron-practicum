@@ -1,0 +1,41 @@
+# Model-ready split of the generated Nigerian Pidgin seed corpus. The raw seed
+# remains unchanged under data/generation/; it is not evaluation data.
+input_path: data/generation/synthetic_text/pidgin/pidgin_synthetic_seed.csv
+cleaned_output_path: data/preprocessing/pidgin/cleaned/pidgin_synthetic_clean.csv.gz
+data_output_path: data/splits/pidgin_synthetic/Data.csv.gz
+report_output_path: data/preprocessing/pidgin/pidgin_synthetic_preprocessing_report.json
+
+text_column: Text
+domain_column: Domain
+split_column: Split
+document_id_column: ID
+required_columns:
+  - ID
+  - Text
+  - Domain
+  - Label_Source
+  - Generator_Model
+require_nonempty_columns:
+  - ID
+  - Label_Source
+  - Generator_Model
+
+allowed_domains:
+  - Agriculture
+  - Finance
+  - Health
+  - Law
+  - Telecommunications
+domain_aliases:
+  agriculture: Agriculture
+  finance: Finance
+  health: Health
+  law: Law
+  telecommunications: Telecommunications
+
+min_words: 12
+max_words: 60
+validation_fraction: 0.15
+test_fraction: 0.15
+exact_stratified_split: true
+split_seed: 13

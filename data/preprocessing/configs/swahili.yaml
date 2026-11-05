@@ -1,0 +1,45 @@
+# 10,000 balanced, already-labelled training examples created by
+# sample_balanced_domains.py. The reviewed Swahili rows remain in the separate
+# Practicum - Manual Validation.csv file and are never read here.
+input_path: data/preprocessing/swahili/raw/swa_10000.csv.gz
+cleaned_output_path: data/preprocessing/swahili/cleaned/swa_clean.csv.gz
+data_output_path: data/splits/swahili/Data.csv.gz
+report_output_path: data/preprocessing/swahili/swa_preprocessing_report.json
+
+text_column: Text
+domain_column: Domain
+split_column: Split (train/dev)
+document_id_column: ID
+required_columns:
+  - ID
+  - Language
+  - Source
+  - License
+  - Text
+  - Domain
+require_nonempty_columns:
+  - ID
+  - Language
+  - Source
+  - License
+
+allowed_domains:
+  - Agriculture
+  - Finance
+  - Health
+  - Law
+  - Telecommunications
+domain_aliases:
+  agriculture: Agriculture
+  finance: Finance
+  health: Health
+  law: Law
+  telecommunications: Telecommunications
+  telecoms: Telecommunications
+
+validation_fraction: 0.15
+test_fraction: 0.15
+split_seed: 13
+exact_stratified_split: true
+min_words: 3
+max_words: 300

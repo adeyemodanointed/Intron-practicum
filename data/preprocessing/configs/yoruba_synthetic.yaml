@@ -1,0 +1,43 @@
+# Model-ready split of the generated Yoruba seed corpus. The original seed CSV
+# remains immutable under data/generation/. Evaluation data is never read here.
+input_path: data/generation/synthetic_text/yoruba/yoruba_synthetic_seed.csv
+cleaned_output_path: data/preprocessing/yoruba/cleaned/yoruba_synthetic_clean.csv.gz
+data_output_path: data/splits/yoruba_synthetic/Data.csv.gz
+report_output_path: data/preprocessing/yoruba/yoruba_synthetic_preprocessing_report.json
+
+text_column: Text
+domain_column: Domain
+split_column: Split
+document_id_column: ID
+required_columns:
+  - ID
+  - Text
+  - Domain
+  - Label_Source
+  - Generator_Model
+require_nonempty_columns:
+  - ID
+  - Label_Source
+  - Generator_Model
+
+allowed_domains:
+  - Agriculture
+  - Finance
+  - Health
+  - Law
+  - Telecommunications
+domain_aliases:
+  agriculture: Agriculture
+  finance: Finance
+  health: Health
+  law: Law
+  telecommunications: Telecommunications
+
+# The downstream classifier receives short passages. This excludes the 239
+# imported AfriDocMT full documents that exceed 60 words; raw data is retained.
+min_words: 12
+max_words: 60
+validation_fraction: 0.15
+test_fraction: 0.15
+exact_stratified_split: true
+split_seed: 13

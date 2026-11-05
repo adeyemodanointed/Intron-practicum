@@ -1,0 +1,14 @@
+data_path: data/splits/kinyarwanda/Data.csv.gz
+model_path: modeling/domain_classification/kinyarwanda/outputs/learning_curve/domain_classifier_1050_per_domain.joblib
+output_dir: evaluation/results/kinyarwanda/tfidf_1050_final
+
+text_column: text
+domain_column: domain
+split_column: Split
+source_column: source
+labels:
+  - Agriculture
+  - Finance
+  - Health
+  - Law
+  - Telecommunications

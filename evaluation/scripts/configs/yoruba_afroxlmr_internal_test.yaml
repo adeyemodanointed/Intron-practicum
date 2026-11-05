@@ -1,0 +1,24 @@
+# Evaluate the already-selected Yoruba AfroXLMR LoRA adapter once on the
+# protected internal test split. This does not train or select a model.
+data_path: data/splits/yoruba_synthetic/Data.csv.gz
+base_model_path: ../PnC/models/afro-xlmr-base
+adapter_path: modeling/domain_classification/yoruba/outputs/afroxlmr_lora/best_adapter
+output_dir: evaluation/results/yoruba/afroxlmr_lora_internal_test
+
+text_column: Text
+domain_column: Domain
+source_column: Label_Source
+split_column: Split
+evaluation_split: test
+evaluation_name: Internal test
+result_prefix: internal_test
+
+labels:
+  - Agriculture
+  - Finance
+  - Health
+  - Law
+  - Telecommunications
+
+max_length: 128
+batch_size: 8

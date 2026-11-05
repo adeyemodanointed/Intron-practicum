@@ -1,0 +1,26 @@
+# Seed data must be separately labelled synthetic or human-reviewed data.
+# Do not place the final evaluation set anywhere in these paths.
+seed_data_path: data/generation/synthetic_text/yoruba/yoruba_synthetic_seed.csv
+
+# First-round real-text candidate pool. Its existing provisional Domain column is
+# retained for comparison, but the bootstrap model does not train on it.
+candidate_data_path: data/preprocessing/yoruba/raw/yor_corpus.csv.gz
+
+output_dir: modeling/domain_classification/yoruba/outputs/bootstrap_round_01
+
+text_column: Text
+domain_column: Domain
+id_column: ID
+allowed_domains:
+  - Agriculture
+  - Finance
+  - Health
+  - Law
+  - Telecommunications
+
+confidence_threshold: 0.95
+validation_fraction: 0.15
+random_seed: 13
+scoring_chunk_size: 50000
+audit_per_domain: 30
+max_features: 200000

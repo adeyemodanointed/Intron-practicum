@@ -1,0 +1,20 @@
+# TF-IDF baseline on the generated Pidgin seed. With only 100 rows per class,
+# this is an initial baseline only; all evaluation remains synthetic-held-out.
+data_path: data/splits/pidgin_synthetic/Data.csv.gz
+output_dir: modeling/domain_classification/pidgin/outputs/learning_curve
+
+text_column: Text
+domain_column: Domain
+split_column: Split
+source_column: Label_Source
+allowed_domains:
+  - Agriculture
+  - Finance
+  - Health
+  - Law
+  - Telecommunications
+
+# The deterministic 70/15/15 per-domain split supports these three sizes.
+examples_per_domain: [20, 40, 70]
+random_seed: 13
+max_features: 200000

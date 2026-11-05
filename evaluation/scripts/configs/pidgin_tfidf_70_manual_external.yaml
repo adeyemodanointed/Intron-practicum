@@ -1,0 +1,17 @@
+# Diagnostic external evaluation of the validation-selected Pidgin TF-IDF model.
+# It only scores the reviewed evaluation set; it does not fit or tune anything.
+data_path: evaluation/evaluation_data/pidgin/domain_evaluation.csv
+model_path: modeling/domain_classification/pidgin/outputs/learning_curve/domain_classifier_70_per_domain.joblib
+output_dir: evaluation/results/pidgin/tfidf_70_manual_external
+
+text_column: text
+domain_column: domain
+source_column: source
+evaluate_all_rows: true
+
+labels:
+  - Agriculture
+  - Finance
+  - Health
+  - Law
+  - Telecommunications

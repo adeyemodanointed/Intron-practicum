@@ -1,0 +1,50 @@
+# Paths are relative to the Intron-practicum repository root.
+input_path: data/preprocessing/kinyarwanda/raw/kin.csv
+cleaned_output_path: data/preprocessing/kinyarwanda/cleaned/kin_clean.csv.gz
+data_output_path: data/splits/kinyarwanda/Data.csv.gz
+report_output_path: data/preprocessing/kinyarwanda/kin_preprocessing_report.json
+
+# Digital Umuganda's Kinyarwanda file uses lower-case field names.
+text_column: text
+domain_column: domain
+split_column: Split
+document_id_column: ID
+required_columns:
+  - ID
+  - source
+  - license
+  - text
+  - domain
+require_nonempty_columns:
+  - ID
+  - source
+  - license
+
+allowed_domains:
+  - Agriculture
+  - Finance
+  - Health
+  - Law
+  - Telecommunications
+domain_aliases:
+  agriculture: Agriculture
+  finance: Finance
+  health: Health
+  law: Law
+  telecoms: Telecommunications
+  telecommunications: Telecommunications
+
+split_aliases:
+  train: train
+  dev: validation
+  validation: validation
+  test: test
+validation_fraction: 0.15
+test_fraction: 0.15
+split_seed: 13
+exact_stratified_split: true
+
+# Keep every reviewed row so this balanced corpus retains 2,000 examples per
+# domain. Length diagnostics remain available in the source data if needed.
+min_words: 1
+max_words: 300
